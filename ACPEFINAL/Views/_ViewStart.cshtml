@@ -1,3 +1,37 @@
-﻿@{
+﻿@using Newtonsoft.Json
+
+@{
+    if (Context.Session.GetString("login") != null)
+    {
+        var valorSessao = Context.Session.GetString("login");
+        var login = JsonConvert.DeserializeObject<Login>(valorSessao);
+        var tipo = login.TipoUsuario;
+
+        switch (tipo)
+        {
+            case 1:
+                Layout = "_LayoutAdministrador";
+                break;
+            case 2:
+                Layout = "_LayoutProfessor";
+                break;
+            case 3:
+                Layout = "_LayoutAluno";
+                break;
+            default:
+                Layout = "_Layout";
+                break;
+        }
+    }
+    else
+    {
+        Layout = "_LayoutDeslogado";
+    }
+
+}
+
+
+@*@{
     Layout = "_Layout";
 }
+*@

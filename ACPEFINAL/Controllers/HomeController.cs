@@ -18,7 +18,7 @@ namespace ACPEFINAL.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult AreaAjuda()
         {
             return View();
         }

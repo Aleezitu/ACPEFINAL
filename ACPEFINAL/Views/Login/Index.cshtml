@@ -1,0 +1,73 @@
+﻿@model ACPEFINAL.Models.Login
+
+@{
+    Layout = "_LayoutLogin";
+
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Noto Sans', sans-serif;
+    }
+
+        body * {
+            box-sizing: border-box;
+        }
+
+</style>
+
+
+@*<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Senha" class="control-label"></label>
+                <input asp-for="Senha" type="password" class="form-control" />
+                <span asp-validation-for="Senha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Entrar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+*@
+
+
+
+<div class="main-login">
+    <div class="left-login">
+        <h1>
+            Faça login <br>
+            E entre em nossa plataforma
+        </h1>
+        <a href="home-page.html"><img src="Img/logoACPE.png" class="left-login-image" alt="Auxiliar de comunicação entre pais e escolas"></a>
+    </div>
+    <div class="right-login">
+        <form asp-action="Index" class="card-login">
+
+            <h2>Login</h2>
+            <div class="textfield">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" placeholder="Email do usuário" />
+            </div>
+            <div class="textfield">
+                <label asp-for="Senha" class="control-label"></label>
+                <input asp-for="Senha" type="password" class="form-control" placeholder="Senha do usuário" />
+            </div>
+            <button class="btn-login" type="submit" onclick="logar(); return; false">
+                Login
+            </button>
+            <!-- <h3><a href="cadastro.html">Matricule-se</a></h3> -->
+        </form>
+    </div>
+</div>
