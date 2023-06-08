@@ -43,11 +43,11 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
             return professor;
         }
 
-        public Models.RecadosAlunos pegarIdAlunos(int idProfessor)
+        public Models.RecadosAlunos pegarIdAlunosRecados(int idProfessor)
         {
             RecadosAlunos recadosAlunos = new RecadosAlunos();
 
-            List<Aluno> alunos = new List<Aluno>();
+            List<Models.Aluno> alunos = new List<Models.Aluno>();
 
             using (SqlConnection connection = new SqlConnection(this.connectionString))
             {
@@ -80,7 +80,6 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
 
         public void cadastrarRecado(Models.RecadosAlunos recadosAlunos, int idProfessor)
         {
-
             using (SqlConnection connection = new SqlConnection(this.connectionString))
             {
                 connection.Open();
@@ -95,6 +94,61 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
                     command.Parameters.Add(new SqlParameter("@assunto", System.Data.SqlDbType.VarChar)).Value = recadosAlunos.Recado.Assunto;
                     command.Parameters.Add(new SqlParameter("@descricao", System.Data.SqlDbType.VarChar)).Value = recadosAlunos.Recado.Descricao;
                     command.Parameters.Add(new SqlParameter("@data", System.Data.SqlDbType.Date)).Value = recadosAlunos.Recado.Data;
+
+                    command.ExecuteScalar();
+                }
+            }
+        }
+
+        public Models.TarefasAlunos pegarIdAlunosTarefas(int idProfessor)
+        {
+            TarefasAlunos tarefaAlunos = new TarefasAlunos();
+
+            List<Models.Aluno> alunos = new List<Models.Aluno>();
+
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+
+                    command.CommandText = "SELECT alu.id_aluno AS id_aluno, alu.nome AS nome FROM Alunos AS alu LEFT JOIN TurmasAlunos AS tua ON (alu.id_aluno=tua.id_aluno) LEFT JOIN Turmas AS tur ON (tua.id_turma=tur.id_turma) LEFT JOIN TurmasProfessores AS tup ON (tur.id_turma=tup.id_turma) LEFT JOIN Professores AS pro ON (tup.id_professor=pro.id_professor) WHERE pro.id_professor = @idProfessor";
+
+                    command.Parameters.Add(new SqlParameter("@idProfessor", System.Data.SqlDbType.Int)).Value = idProfessor;
+                    
+                    SqlDataReader dr = command.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        Models.Aluno aluno = new Models.Aluno();
+                        aluno.Id = (int)dr["id_aluno"];
+                        aluno.Nome = dr["nome"].ToString();
+
+                        alunos.Add(aluno);
+                    }
+                }
+                tarefaAlunos.Alunos = alunos;
+            }
+            return tarefaAlunos;
+        }
+
+        public void cadastrarTarefas(Models.TarefasAlunos tarefasAlunos, int idProfessor)
+        {
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = "INSERT INTO Tarefas (id_professor, id_aluno, assunto, data, local_arquivo) values (@id_professor, @id_aluno, @assunto, @data, @local_arquivo); select convert(int,@@identity) as id;;";
+
+                    command.Parameters.Add(new SqlParameter("@id_professor", System.Data.SqlDbType.Int)).Value = idProfessor;
+                    command.Parameters.Add(new SqlParameter("@id_aluno", System.Data.SqlDbType.Int)).Value = tarefasAlunos.Tarefa.Id;
+                    command.Parameters.Add(new SqlParameter("@assunto", System.Data.SqlDbType.VarChar)).Value = tarefasAlunos.Tarefa.Assunto;
+                    command.Parameters.Add(new SqlParameter("@data", System.Data.SqlDbType.Date)).Value = tarefasAlunos.Tarefa.Data;
+                    command.Parameters.Add(new SqlParameter("@local_arquivo", System.Data.SqlDbType.VarChar)).Value = tarefasAlunos.Tarefa.LocalArquivo;
 
                     command.ExecuteScalar();
                 }

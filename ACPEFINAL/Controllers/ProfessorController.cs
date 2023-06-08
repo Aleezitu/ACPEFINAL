@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ACPEFINAL.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ACPEFINAL.Controllers
 {
@@ -28,7 +29,7 @@ namespace ACPEFINAL.Controllers
         public IActionResult Recados()
         {
             int idProfessor = this.sessao.get().Id;
-            return View(this.repository.pegarIdAlunos(idProfessor));
+            return View(this.repository.pegarIdAlunosRecados(idProfessor));
         }
 
         [HttpPost]
@@ -42,7 +43,18 @@ namespace ACPEFINAL.Controllers
 
         public IActionResult Tarefas()
         {
-            return View();
+            int idProfessor = this.sessao.get().Id;
+            return View(this.repository.pegarIdAlunosTarefas(idProfessor));
+            
+        }
+
+        [HttpPost]
+        public IActionResult Tarefas(Models.TarefasAlunos tarefasAlunos)
+        {
+            int idProfessor = this.sessao.get().Id;
+
+            repository.cadastrarTarefas(tarefasAlunos, idProfessor);
+            return RedirectToAction("Index", "Professor");
         }
 
         public IActionResult Ajuda()

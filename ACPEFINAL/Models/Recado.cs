@@ -7,5 +7,6 @@
         public string Assunto{ get; set; }
         public DateTime Data { get; set; }
         public string Descricao { get; set; }
+        public string NomeProfessor { get; set; }
     }
 }

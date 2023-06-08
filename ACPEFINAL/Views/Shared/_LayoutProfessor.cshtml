@@ -25,18 +25,17 @@
                 <a asp-controller="Professor" asp-action="Perfil" class="nav-link @(ViewData["Title"] == "Perfil Professor" ? "active" : "")">Perfil</a>
             </li>
             <li class="nav-item">
-                <a asp-controller="Professor" asp-action="Recados" class="nav-link @(ViewData["Title"] == "Cadastrar Recados" ? "active" : "")" class="nav-link">Recados</a>
+                <a asp-controller="Professor" asp-action="Recados" class="nav-link @(ViewData["Title"] == "Cadastrar Recados" ? "active" : "")">Recados</a>
             </li>
             <li class="nav-item">
-                <a href="tarefas-professor.html" class="nav-link">Tarefas</a>
-            </li>
-            <li class="nav-item">
-                <a href="galeria-prof.html" class="nav-link">Galeria</a>
+                <a asp-controller="Professor" asp-action="Tarefas" class="nav-link @(ViewData["Title"] == "Cadastrar Tarefas" ? "active" : "")">Tarefas</a>
             </li>
             <li class="nav-item">
                 <a href="ajuda-professor.html" class="nav-link">Ajuda</a>
             </li>
-            <li class="nav-item"><a href="login.html" class="nav-link">logout</a></li>
+            <li class="nav-item">
+                <a asp-controller="Login" asp-action="Logout" class="nav-link">Logout</a>
+            </li>
         </ul>
     </header>
 

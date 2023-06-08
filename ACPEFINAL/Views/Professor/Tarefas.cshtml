@@ -1,0 +1,35 @@
+﻿@model ACPEFINAL.Models.TarefasAlunos
+
+@{
+    ViewData["Title"] = "Cadastrar Tarefas";
+}
+
+<form class="d-flex flex-column justify-content-center align-items-center" asp-controller="Professor" asp-action="Tarefas" method="post">
+    <h1>Cadastre-se</h1>
+    <div class="col-md-14">
+        <div class="col-md-7">
+            <label asp-for="Tarefa.Id">Selecione o aluno: </label>
+            <select asp-for="Tarefa.Id">
+                @foreach (var item in Model.Alunos)
+                {
+                    <option value="@item.Id">@item.Nome</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-7">
+            <label asp-for="Tarefa.Assunto">Digite </label>
+            <input asp-for="Tarefa.Assunto" />
+        </div>
+        <div class="col-md-7">
+            <label asp-for="Tarefa.Data">Data</label>
+            <input asp-for="Tarefa.Data" />
+        </div>
+        <div class="col-md-7">
+            <label asp-for="Tarefa.LocalArquivo">Local Arquivo</label>
+            <input asp-for="Tarefa.LocalArquivo" type="file" />
+        </div>
+
+    </div>
+
+    <input type="submit" class="ps-btn" value="Cadastrar">
+</form>

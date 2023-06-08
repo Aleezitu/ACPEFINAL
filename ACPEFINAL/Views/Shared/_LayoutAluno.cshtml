@@ -19,24 +19,21 @@
 
         <ul class="nav nav-pills">
             <li class="nav-item">
-                <a asp-controller="Professor" asp-action="Index" class="nav-link active" aria-current="page">Home</a>
+                <a asp-controller="Aluno" asp-action="Index" class="nav-link @(ViewData["Title"] == "Home Aluno" ? "active" : "")" aria-current="page">Home</a>
             </li>
             <li class="nav-item">
-                <a asp-controller="Professor" asp-action="Perfil" class="nav-link">Perfil</a>
+                <a asp-controller="Aluno" asp-action="Perfil" class="nav-link @(ViewData["Title"] == "Perfil do Aluno" ? "active" : "")">Perfil</a>
             </li>
             <li class="nav-item">
-                <a href="recado-professor.html" class="nav-link">Recados</a>
+                <a asp-controller="Aluno" asp-action="Recados" class="nav-link @(ViewData["Title"] == "Recados do Aluno" ? "active" : "")">Recados</a>
             </li>
             <li class="nav-item">
-                <a href="tarefas-professor.html" class="nav-link">Tarefas</a>
-            </li>
-            <li class="nav-item">
-                <a href="galeria-prof.html" class="nav-link">Galeria</a>
+                <a asp-controller="Aluno" asp-action="Tarefas" class="nav-link @(ViewData["Title"] == "Tarefas do Aluno" ? "active" : "")">Tarefas</a>
             </li>
             <li class="nav-item">
                 <a href="ajuda-professor.html" class="nav-link">Ajuda</a>
             </li>
-            <li class="nav-item"><a href="login.html" class="nav-link">logout</a></li>
+            <a asp-controller="Login" asp-action="Logout" class="nav-link">Logout</a>
         </ul>
     </header>
 

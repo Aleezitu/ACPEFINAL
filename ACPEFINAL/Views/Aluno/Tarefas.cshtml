@@ -1,0 +1,29 @@
+﻿@model IEnumerable<ACPEFINAL.Models.Tarefa>
+
+@{
+    ViewData["Title"] = "Tarefas do Aluno";
+}
+
+<style>
+    .card {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        background-color: pink;
+    }
+
+</style>
+
+<div style="display:flex; gap:5px;">
+    @foreach (var item in Model)
+    {
+        <fieldset class="card">
+            <p>
+                @Html.DisplayFor(modelItem => item.Assunto)
+                <span class="enviado">enviado por: @Html.DisplayFor(modelItem => item.NomeProfessor), @Html.DisplayFor(modelItem => item.Data)</span>
+            </p>
+            <input type="checkbox" name="Lido" id="lido1">
+            <label for="lido1">Estou ciente!</label>
+        </fieldset>
+    }
+</div>

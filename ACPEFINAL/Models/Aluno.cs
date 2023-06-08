@@ -7,7 +7,7 @@
         public string Cpf { get; set; }
         public string Email { get; set; }
         public string Senha { get; set; }
-        public DateOnly DataNascimento { get; set; }
+        public DateTime DataNascimento { get; set; }
         public string Sexo { get; set; }
         public string NomeResponsavel { get; set; }
         public string CpfResponsavel { get; set; }
@@ -22,7 +22,7 @@
             this.Cpf = "";
             this.Email = "";
             this.Senha = "";
-            this.DataNascimento = DateOnly.MaxValue; 
+            this.DataNascimento = DateTime.Now; 
             this.Sexo = "";
             this.NomeResponsavel = "";
             this.CpfResponsavel = "";

@@ -42,7 +42,7 @@ namespace ACPEFINAL.Controllers
                         return RedirectToAction("Index", "Professor");
                     case 3:
                         //aluno
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Aluno");
                     default:
                         break;
                 }
