@@ -1,0 +1,35 @@
+﻿@model ACPEFINAL.Models.RecadosAlunos
+
+@{
+    ViewData["Title"] = "Cadastrar Recados";
+}
+
+<form class="d-flex flex-column justify-content-center align-items-center" asp-controller="Professor" asp-action="Recados" method="post">
+    <h1>Cadastre-se</h1>
+    <div class="col-md-14">
+        <div class="col-md-7">
+            <label asp-for="Recado.Id">Selecione o aluno: </label>
+            <select asp-for="Recado.Id">
+                @foreach (var item in Model.Alunos)
+                {
+                    <option value="@item.Id">@item.Nome</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-7">
+            <label asp-for="Recado.Assunto">Digite </label>
+            <input asp-for="Recado.Assunto" />
+        </div>
+        <div class="col-md-7">
+            <label asp-for="Recado.Data">Data</label>
+            <input asp-for="Recado.Data" />
+        </div>
+        <div class="col-md-7">
+            <label asp-for="Recado.Descricao">Descricao</label>
+            <input asp-for="Recado.Descricao" />
+        </div>
+
+    </div>
+
+    <input type="submit" class="ps-btn" value="Cadastrar">
+</form>

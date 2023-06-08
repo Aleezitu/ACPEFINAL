@@ -19,13 +19,13 @@
 
         <ul class="nav nav-pills">
             <li class="nav-item">
-                <a asp-controller="Professor" asp-action="Index" class="nav-link @(ViewData["Title"] == "Home Professor" ? "active" : "")" aria-current="page">Home</a>
+                <a asp-controller="Professor" asp-action="Index" class="nav-link active" aria-current="page">Home</a>
             </li>
             <li class="nav-item">
-                <a asp-controller="Professor" asp-action="Perfil" class="nav-link @(ViewData["Title"] == "Perfil Professor" ? "active" : "")">Perfil</a>
+                <a asp-controller="Professor" asp-action="Perfil" class="nav-link">Perfil</a>
             </li>
             <li class="nav-item">
-                <a asp-controller="Professor" asp-action="Recados" class="nav-link @(ViewData["Title"] == "Cadastrar Recados" ? "active" : "")" class="nav-link">Recados</a>
+                <a href="recado-professor.html" class="nav-link">Recados</a>
             </li>
             <li class="nav-item">
                 <a href="tarefas-professor.html" class="nav-link">Tarefas</a>
@@ -40,8 +40,7 @@
         </ul>
     </header>
 
-    <h1>professor</h1>
-
+    <h1>adm</h1>
 
     <main role="main" class="pb-3">
         @RenderBody()

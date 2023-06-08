@@ -1,0 +1,146 @@
+﻿@model ACPEFINAL.Models.Professor
+
+@{
+    ViewData["Title"] = "Perfil Professor";
+}
+
+
+<style>
+    .segura-info {
+        margin: 10px 0;
+        box-shadow: 1px 2px 13px -4px rgba(0, 0, 0, 0.75);
+    
+    }
+    
+    .info-professor {
+        border: 2px solid black;
+        padding-top: 40px;
+        list-style: none;
+        background-color: #58a5e7e0;
+        border-radius: 15px;
+    }
+
+    .layout-perfil-prof {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+</style>
+
+<div style="margin: 20px; padding: 10px">
+    <div class="info-professor">
+        <div class="img-perfil">
+            <img src="img/Aposentadoria-de-professor-universitario-no-INSS-IMG-930x620.jpg" alt="imagem de aluno">
+        </div>
+        <div class="layout-perfil-prof">
+            <div class="segura-informacoe">
+                <div class="info-basic">
+                    <h3 class="texto-info-basica">Informações básicas</h3>
+                </div>
+                <div class="texto-info">
+                    <h3 class="texto-info-basica">
+                        Aqui você encontra informações basicas do seu perfil como professor
+                    </h3>
+                </div>
+                <div class="caixa-segura-layout">
+                    <div class="segura-info-nome">
+                        <h3 class="texto-exibicao">Nome</h3>
+                    </div>
+                    <div class="segura-nome">
+                        <h3 class="texto-exibicao">
+                            @Html.DisplayFor(model => model.Nome)
+                        </h3>
+                    </div>
+                </div>
+                <hr>
+                <div class="segura-data-nascimento">
+                    <div class="data-nascimento">
+                        <h3 class="texto-exibicao">Data de nascimento</h3>
+                    </div>
+                    <div class="segura-dia">
+                        <h3 class="texto-exibicao">
+                            @Html.DisplayFor(model => model.DataNascimento)
+                        </h3>
+                    </div>
+                </div>
+                <hr>
+                <div class="documento-pessoal">
+                    <div class="segura-cpf">
+                        <h3 class="texto-exibicao">CPF</h3>
+                    </div>
+                    <div class="cpf">
+                        <h3 class="texto-exibicao">
+                            @Html.DisplayFor(model => model.Cpf)
+                        </h3>
+                    </div>
+                </div>
+                <hr>
+                <div class="genero">
+                    <div class="genero-professor">
+                        <h3 class="texto-exibicao">Gênero</h3>
+                    </div>
+                    <div class="mascu-femi">
+                        <h3 class="texto-exibicao">
+                            @Html.DisplayFor(model => model.Sexo)
+                        </h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-contato">
+                <div class="texto-info-conta">
+                    <h3 class="texto-info-basica">informações de contato</h3>
+                </div>
+
+                <div class="box-email">
+                    <div class="email">
+                        <h3 class="texto-exibicao">E-mail</h3>
+                    </div>
+                    <div class="exemplo-email">
+                        <h3 class="texto-exibicao">
+                            @Html.DisplayFor(model => model.Email)
+                        </h3>
+                    </div>
+                </div>
+
+                <hr>
+                <div class="box-telefone">
+                    <div class="telefone">
+                        <h3 class="texto-exibicao">Telefone</h3>
+                    </div>
+                    <div class="numero-telefone">
+                        <h3 class="texto-exibicao">
+                            @Html.DisplayFor(model => model.Telefone)
+                        </h3>
+                    </div>
+                </div>
+                <hr>
+@*                <div class="box-select">
+                    <div class="texto-turma">
+                        <h3 class="texto-exibicao">Turmas</h3>
+                    </div>
+                    <select name="turma" id="turma">
+                        <option value="0">Turmas</option>
+                        <option value="1">1º-A</option>
+                        <option value="1">1º-B</option>
+                        <option value="1">1º-C</option>
+                        <option value="1">2º-A</option>
+                        <option value="1">2º-B</option>
+                        <option value="1">2º-C</option>
+                        <option value="1">3º-A</option>
+                        <option value="1">3º-B</option>
+                        <option value="1">3º-C</option>
+                        <option value="1">4º-A</option>
+                        <option value="1">4º-B</option>
+                        <option value="1">4º-C</option>
+                    </select>
+                </div>*@
+            </div>
+        </div>
+        <div class="buttons">
+            <button type="submit" class="salvar">Salvar</button>
+            <button type="reset" class="limpar">Limpar</button>
+        </div>
+    </div>
+</div>

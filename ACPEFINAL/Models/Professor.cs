@@ -1,4 +1,6 @@
-﻿namespace ACPEFINAL.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ACPEFINAL.Models
 {
     public class Professor
     {
@@ -7,7 +9,8 @@
         public string Cpf { get; set; }
         public string Email { get; set; }
         public string Senha { get; set; }
-        public DateOnly DataNascimento { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime DataNascimento { get; set; }
         public string Sexo { get; set; }
         public string Telefone { get; set; }
         public string Formacao { get; set; }
@@ -21,7 +24,7 @@
             this.Cpf = "";
             this.Email = "";
             this.Senha = "";
-            this.DataNascimento = DateOnly.MaxValue;
+            this.DataNascimento = DateTime.Now;
             this.Sexo = "";
             this.Telefone = "";
             this.Formacao = "";
