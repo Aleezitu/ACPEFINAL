@@ -1,77 +1,33 @@
-/* **Estilização do layout** */
-.layout-perfil-prof {
-  display: flex;
-  flex-direction: column;
+.inf-basica, .inf-contato {
+    border: 1px solid #f5f5f5;
+    padding: 20px 20px;
+    margin: 50px 0;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
-.caixa-segura-layout,
-.segura-data-nascimento,
-.documento-pessoal,
-.genero,
-.box-email,
-.box-telefone {
-  display: flex;
-  flex-direction: row;
-  background-color: #fff;
-  border-radius: 5px;
-  width: 900px;
-  justify-content: space-around;
-  align-self: center;
+.img-perfil{
+    display:flex;
+    justify-content:center;
 }
+    .img-perfil img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 500px;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 8px 0px, rgba(60, 64, 67, 0.15) 0px 1px 5px 1px;
+    }
 
-.segura-informacoe,
-.info-contato {
-  margin: 30px 0;
-  align-self: center;
-  border: 3px solid #060606;
-  padding: 10px;
-  border-radius: 5px;
+.label > h3{
+    font-size:2rem;
 }
-
-.texto-turma {
-  background-color: #fff;
-  border-radius: 5px;
-  padding: 5px;
+.label > span{
+    font-size:1.6rem;
+    margin-bottom:30px;
+    text-decoration:dashed;
 }
-
-.texto-info-conta,
-.texto-info {
-  margin-bottom: 20px;
+.conteudo p{
+    font-size:1.3rem;
 }
-
-/* **Estilização dos botões** */
-.buttons,
-.box-select {
-  display: flex;
-  flex-direction: row;
-}
-
-.box-select {
-  margin-top: 20px;
-  justify-content: space-around;
-}
-
-.buttons {
-  justify-content: center;
-}
-
-#turma {
-  border-radius: 5px;
-}
-
-.limpar:hover,
-.salvar:hover {
-  scale: 1.1;
-  transition: all 0.3s;
-}
-
-/* **Estilização texto** */
-.texto-info-basica {
-  font-size: 20px;
-  font-weight: 500;
-}
-
-.texto-exibicao {
-  font-weight: 400;
-  font-size: 20px;
+.label{
+    margin:15px 0;
 }
