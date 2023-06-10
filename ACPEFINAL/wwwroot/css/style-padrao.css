@@ -1,0 +1,30 @@
+﻿
+header {
+    background-color: #fff !important;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 15px;
+}
+
+main {
+    margin-top: 150px;
+}
+
+@media (max-width:467px) {
+    main {
+        margin-top: 200px;
+    }
+}
+
+.rodape {
+    background-color: #0897E7;
+}
+.rodape p{
+    margin:0;
+    padding:8px 0;
+    color:#fff;
+}
+main{
+    height:100vh;
+}

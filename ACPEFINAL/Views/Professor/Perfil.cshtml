@@ -6,66 +6,79 @@
 
 <link href="~/css/perfil-prof.css" rel="stylesheet" />
 
-<div class="container">
-    <div class="info-professor">
-        <div class="img-perfil">
-            <img src="https://guiadoestudante.abril.com.br/wp-content/uploads/sites/4/2018/01/professora.jpg?quality=100&strip=info&w=1280&h=720&crop=1" alt="imagem do professor">
-        </div>
-        <div class="inf-basica">
-            <div class="label">
-                <span>Informações básicas</span>
+
+    <div class="welcome">
+        <h1 class="text-center">Seja bem-vindo professor'ª', @Html.DisplayFor(model => model.Nome)</h1>
+    </div>
+    <div class="container">
+        <div class="info-professor">
+            <div class="img-perfil">
+                <img src="https://guiadoestudante.abril.com.br/wp-content/uploads/sites/4/2018/01/professora.jpg?quality=100&strip=info&w=1280&h=720&crop=1" alt="imagem do professor">
             </div>
-            <div class="label">
-                <h3>Nome</h3>
+            <div class="inf-basica">
+                <div class="label ">
+                    <span class="text-center">Informações básicas</span>
+                </div>
+                <div class="capsula">
+                    <div class="label">
+                        <h3>Nome</h3>
+                    </div>
+                    <div class="conteudo">
+                        <p>@Html.DisplayFor(model => model.Nome)</p>
+                    </div>
+                </div>
+                <div class="capsula">
+                    <div class="label">
+                        <h3>Data de nascimento</h3>
+                    </div>
+                    <div class="conteudo">
+                        <p>@Html.DisplayFor(model => model.DataNascimento)</p>
+                    </div>
+                </div>
+                <div class="capsula">
+                    <div class="label">
+                        <h3>CPF</h3>
+                    </div>
+                    <div class="conteudo">
+                        <p>@Html.DisplayFor(model => model.Cpf)</p>
+                    </div>
+                </div>
+                <div class="capsula">
+                    <div class="label">
+                        <h3>Gênero</h3>
+                    </div>
+                    <div class="conteudo">
+                        <p class="">
+                            @Html.DisplayFor(model => model.Sexo)
+                        </p>
+                    </div>
+                </div>
             </div>
-            <div class="conteudo">
-                <p>@Html.DisplayFor(model => model.Nome)</p>
-            </div>
+            <div class="inf-contato">
                 <div class="label">
-                    <h3>Data de nascimento</h3>
+                    <span class="text-center">Informações de contato</span>
                 </div>
-                <div class="conteudo">
-                    <p>@Html.DisplayFor(model => model.DataNascimento)</p>
+                <div class="capsula">
+                    <div class="label">
+                        <h3>E-mail</h3>
+                    </div>
+                    <div class="conteudo">
+                        <p class="">
+                            @Html.DisplayFor(model => model.Email)
+                        </p>
+                    </div>
                 </div>
-                <div class="label">
-                    <h3>CPF</h3>
-                </div>
-                <div class="conteudo">
-                    <p>@Html.DisplayFor(model => model.Cpf)</p>
-                </div>
-            <div class="">
-                <div class="label">
-                    <h3>Gênero</h3>
-                </div>
-                <div class="conteudo">
-                    <p class="">
-                        @Html.DisplayFor(model => model.Sexo)
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="inf-contato">
-            <div class="label">
-                <span>Informações de contato</span>
-            </div>
-            <div class="label">
-                <h3>E-mail</h3>
-            </div>
-            <div class="conteudo">
-                <p class="">
-                    @Html.DisplayFor(model => model.Email)
-                </p>
-            </div>
-            <div class="">
-                <div class="label">
-                    <h3 class="">Telefone</h3>
-                </div>
-                <div class="conteudo">
-                    <p class="">
-                        @Html.DisplayFor(model => model.Telefone)
-                    </p>
+                <div class="capsula">
+                    <div class="label">
+                        <h3 class="">Telefone</h3>
+                    </div>
+                    <div class="conteudo">
+                        <p class="">
+                            @Html.DisplayFor(model => model.Telefone)
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+

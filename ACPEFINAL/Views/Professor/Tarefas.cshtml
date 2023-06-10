@@ -6,31 +6,32 @@
 <link href="~/css/recados-prof.css" rel="stylesheet" />
 
 
+
 <div class="container">
-    <div class="title-sessao">
+    <div class="title-sessao text-center">
         <h1>Adicionar tarefas</h1>
     </div>
-    <div class="container-form">
+    <div class="container-form mg col-md-7 col-lg-7 col-xs-12 col-sm-12">
         <form asp-controller="Professor" asp-action="Tarefas" method="post">
-            <div class="form-group">
+            <div class="form-group label">
                 <label asp-for="Tarefa.Id">Selecione o aluno: </label>
-                <select class="form-control w-50" asp-for="Tarefa.Id">
+                <select class="form-select" asp-for="Tarefa.Id">
                     @foreach (var item in Model.Alunos)
                     {
                         <option value="@item.Id">@item.Nome</option>
                     }
                 </select>
-                <div class="form-group">
+                <div class="form-group label">
                     <label asp-for="Tarefa.Assunto">Digite a tarefa </label>
-                    <input  class="form-control w-50" asp-for="Tarefa.Assunto" />
+                    <input  class="form-control" asp-for="Tarefa.Assunto" />
                 </div>
-                <div class="form-group">
+                <div class="form-group label">
                     <label asp-for="Tarefa.Data">Data</label>
-                    <input  type="date" class="form-control w-50" asp-for="Tarefa.Data" />
+                    <input  type="date" class="form-control" asp-for="Tarefa.Data" />
                 </div>
-                <div class="form-group">
+                <div class="form-group label">
                     <label asp-for="Tarefa.LocalArquivo">Local Arquivo</label>
-                    <input class="form-control w-50" asp-for="Tarefa.LocalArquivo" type="file" />
+                    <input class="form-control" asp-for="Tarefa.LocalArquivo" type="file" />
                 </div>
             </div>
             <input type="submit" class="btn" value="Cadastrar">

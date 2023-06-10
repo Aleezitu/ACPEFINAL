@@ -6,32 +6,34 @@
 
 <link href="~/css/recados-prof.css" rel="stylesheet" />
 
+
+
 <div class="container">
-    <div class="title-sessao">
+    <div class="title-sessao text-center">
         <h1>Adicionar Recados</h1>
     </div>
-    <div class="container-form">
-        <form class="" asp-controller="Professor" asp-action="Recados" method="post">
-               <div class="form-group">
+    <div class="container-form mg col-md-7 col-lg-7 col-sm-12 col-xs-12">
+        <form asp-controller="Professor" asp-action="Recados" method="post">
+               <div class="form-group label">
                     <label asp-for="Recado.Id">Selecione o aluno: </label>
-                    <select class="form-control w-25" asp-for="Recado.Id">
+                    <select class="form-select" asp-for="Recado.Id">
                         @foreach (var item in Model.Alunos)
                         {
                             <option value="@item.Id">@item.Nome</option>
                         }
                     </select>
             </div>
-                <div class="form-group">
+                <div class="form-group label">
                     <label asp-for="Recado.Assunto">Digite o assunto </label>
-                    <input class="form-control w-25" asp-for="Recado.Assunto" />
+                    <input class="form-control" asp-for="Recado.Assunto" />
                 </div>
-            <div class="form-group">
+            <div class="form-group label">
                     <label asp-for="Recado.Data">Data</label>
-                <input class="form-control w-25" asp-for="Recado.Data" />
+                <input class="form-control" asp-for="Recado.Data" />
                 </div>
-            <div class="form-group">
+            <div class="form-group label">
                     <label asp-for="Recado.Descricao">Descrição</label>
-                <input class="form-control w-50" asp-for="Recado.Descricao" />
+                <input class="form-control" asp-for="Recado.Descricao" />
                 </div>
             <input type="submit" class="btn" value="Cadastrar">
         </form>

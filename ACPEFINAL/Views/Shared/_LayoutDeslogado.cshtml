@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - ACPEFINAL</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style-padrao.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ACPEFINAL.styles.css" asp-append-version="true" />
 </head>
 <body>
@@ -23,14 +24,45 @@
 
         <main role="main" class="pb-3">
             @RenderBody()
+        <footer class="probootstrap-footer probootstrap-bg container fundo-equipe">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="probootstrap-footer-widget">
+                            <h3>Sobre nós</h3>
+                            <p>Somos uma equipe na qual desejamos facilitar a comunicação entre o pais e instituição, priorizando a agilidade e transparência no desenvolvimento dos alunos. </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="probootstrap-footer-widget">
+                            <h3>Informações de contato</h3>
+                            <ul class="probootstrap-contact-info">
+                                <li><i class="fa-solid fa-location-dot"></i><span> Av. Habib Gabriel, 1360 - Jardim Buscardi, Matão - SP, 15990-539</span></li>
+                                <li><i class="fa-solid fa-square-envelope"></i><span> f297acad@cps.sp.gov.br</span></li>
+                                <li><i class="fa-solid fa-phone"></i><span> (16) 2016-2694</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" zekinha d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                <p class="col-md-4 mb-0">© 2022 Desenvolvido pelo grupo 7</p>
+                <a href="#"
+                   class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                </a>
+                <ul class="nav col-md-4 justify-content-end">
+                    <li class="nav-item"><a href="home-page.html" class="nav-link px-4">Home</a></li>
+                    <li class="nav-item"><a href="ajudaVisitante.html" class="nav-link px-4">Ajuda</a></li>
+                </ul>
+            </div>
+        </footer>
         </main>
 
 
-    <footer class="border-top footer text-muted">
-        <div class="container d-flex justify-content-center">
-            &copy; 2023 - Desenvolvido pelo Grupo 7
-        </div>
-    </footer>
+   
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
