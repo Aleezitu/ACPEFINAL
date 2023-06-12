@@ -8,10 +8,32 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/style-padrao.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ACPEFINAL.styles.css" asp-append-version="true" />
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
 
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-
+    <div class="wrapper">
     <header class="d-flex flex-wrap align-items-center justify-content-center mb-4 border-bottom">
         <a href="/" class="d-flex mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
             <span class="fs-3">
@@ -41,16 +63,15 @@
         </ul>
     </header>
 
-
-
-    <main role="main">
+    <main role="main" class="pb-3">
         @RenderBody()
     </main>
-
 
     <footer class="rodape">
         <p>Desenvolvido por &copy;Grupo 7</p>
     </footer>
+    </div>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
