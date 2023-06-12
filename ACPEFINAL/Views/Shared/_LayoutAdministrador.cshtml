@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom" style="position:inherit;">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
             <span class="fs-3">
                 <img src="~/img/logoacpe.png" style="width: 50px;" alt="logo do projeto de Auxiliar de Comunicação entre Pais e Escola" />
@@ -19,24 +19,20 @@
 
         <ul class="nav nav-pills">
             <li class="nav-item">
-                <a asp-controller="Professor" asp-action="Index" class="nav-link active" aria-current="page">Home</a>
+                <a asp-controller="Home" asp-action="Index" class="nav-link @(ViewData["Title"] == "Home Page" ? "active" : "")">Home</a>
             </li>
             <li class="nav-item">
-                <a asp-controller="Professor" asp-action="Perfil" class="nav-link">Perfil</a>
+                <a asp-controller="Administrador" asp-action="ListarAlunos" class="nav-link @(ViewData["Title"] == "Listar Alunos" ? "active" : "")">Listar alunos</a>
             </li>
             <li class="nav-item">
-                <a href="recado-professor.html" class="nav-link">Recados</a>
+                <a asp-controller="Administrador" asp-action="ListarProfessor" class="nav-link @(ViewData["Title"] == "Listar Professores" ? "active" : "")">Listar professores</a>
             </li>
             <li class="nav-item">
-                <a href="tarefas-professor.html" class="nav-link">Tarefas</a>
+                <a asp-controller="Administrador" asp-action="Index" class="nav-link @(ViewData["Title"] == "Cadastro de Usuarios" ? "active" : "")">Cadastro</a>
             </li>
             <li class="nav-item">
-                <a href="galeria-prof.html" class="nav-link">Galeria</a>
+                <a asp-controller="Login" asp-action="Logout" class="nav-link">Logout</a>
             </li>
-            <li class="nav-item">
-                <a href="ajuda-professor.html" class="nav-link">Ajuda</a>
-            </li>
-            <li class="nav-item"><a href="login.html" class="nav-link">logout</a></li>
         </ul>
     </header>
 

@@ -1,0 +1,54 @@
+﻿@model ACPEFINAL.Models.AlunoEnderecoLogin
+
+@{
+    ViewData["Title"] = "Listar Alunos";
+}
+
+<h1>Listar Alunos</h1>
+
+<p><a asp-action="Create">Criar Novo</a></p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Data de Nascimento</th>
+            <th>Sexo</th>
+            <th>Telefone</th>
+            <th>Email</th>
+            <th>DataCriacao</th>
+            <th>Rua</th>
+            <th>Número</th>
+            <th>Complemento</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+            <th>País</th>
+            <th>Sigla</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Aluno.Count; i++)
+        {
+            <tr>
+                <td>@Model.Aluno[i].Nome</td>
+                <td>@Model.Aluno[i].Cpf</td>
+                <td>@Model.Aluno[i].DataNascimento</td>
+                <td>@Model.Aluno[i].Sexo</td>
+                <td>@Model.Aluno[i].Telefone</td>
+                <td>@Model.Aluno[i].Email</td>
+                <td>@Model.Aluno[i].DataCriacao</td>
+
+                <td>@Model.Endereco[i].Rua</td>
+                <td>@Model.Endereco[i].Numero</td>
+                <td>@Model.Endereco[i].Complemento</td>
+                <td>@Model.Endereco[i].Cidade</td>
+                <td>@Model.Endereco[i].Estado</td>
+                <td>@Model.Endereco[i].Pais</td>
+                <td>@Model.Endereco[i].Sigla</td>
+                <td>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

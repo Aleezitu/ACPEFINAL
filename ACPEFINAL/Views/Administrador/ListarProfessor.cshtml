@@ -1,0 +1,59 @@
+﻿@*@model IEnumerable<ACPEFINAL.Models.ProfessorEndereco>
+*@
+@model ACPEFINAL.Models.ProfessorEndereco
+
+@{
+    ViewData["Title"] = "Listar Professores";
+}
+
+<h1>Listar Alunos</h1>
+
+<p><a asp-action="Create">Criar Novo</a></p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Data de Nascimento</th>
+            <th>Sexo</th>
+            <th>Telefone</th>
+            <th>Email</th>
+            <th>Formacao</th>
+            <th>DataCriacao</th>
+
+            <th>Rua</th>
+            <th>Número</th>
+            <th>Complemento</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+            <th>País</th>
+            <th>Sigla</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Professor.Count; i++)
+        {
+            <tr>
+                <td>@Model.Professor[i].Nome</td>
+                <td>@Model.Professor[i].Cpf</td>
+                <td>@Model.Professor[i].DataNascimento</td>
+                <td>@Model.Professor[i].Sexo</td>
+                <td>@Model.Professor[i].Telefone</td>
+                <td>@Model.Professor[i].Email</td>
+                <td>@Model.Professor[i].Formacao</td>
+                <td>@Model.Professor[i].DataCriacao</td>
+
+                <td>@Model.Endereco[i].Rua</td>
+                <td>@Model.Endereco[i].Numero</td>
+                <td>@Model.Endereco[i].Complemento</td>
+                <td>@Model.Endereco[i].Cidade</td>
+                <td>@Model.Endereco[i].Estado</td>
+                <td>@Model.Endereco[i].Pais</td>
+                <td>@Model.Endereco[i].Sigla</td>
+                <td>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

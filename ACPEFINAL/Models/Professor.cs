@@ -15,7 +15,6 @@ namespace ACPEFINAL.Models
         public string Telefone { get; set; }
         public string Formacao { get; set; }
         public DateTime DataCriacao { get; set; }
-        public string TipoUsuario { get; set; }
 
         public Professor()
         {
@@ -29,7 +28,6 @@ namespace ACPEFINAL.Models
             this.Telefone = "";
             this.Formacao = "";
             this.DataCriacao = DateTime.Now;
-            this.TipoUsuario = "Administrador";
         }
     }
 }
