@@ -1,0 +1,38 @@
+﻿.btns .criar {
+    background-color: #00DFA2;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 15px;
+       
+}
+
+.btns .editar {
+    background-color: #0897e7;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 15px;
+}
+
+.btns .excluir {
+    background-color: #CD1818;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 15px;
+}
+
+.table{
+    margin: 30px 0;
+}
+
+.container{
+    width: 97%;
+}
+
+body {
+    background-color: #a9c5e98f
+}
+
+tbody > tr {
+    background-color: #8EC5FC;
+    background-image: linear-gradient(225deg, #8EC5FC 45%, #E0C3FC 82%, #ffffff 100%);
+}
