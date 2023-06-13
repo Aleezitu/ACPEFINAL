@@ -87,10 +87,11 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = "INSERT INTO Recados (id_professor, id_aluno, assunto, descricao, data) values (@id_professor, @id_aluno, @assunto, @descricao, @data); select convert(int,@@identity) as id;;";
+                    command.CommandText = "INSERT INTO Recados (id_professor, id_aluno, id_status_recado, assunto, descricao, data) values (@id_professor, @id_aluno, @id_status_recado, @assunto, @descricao, @data); select convert(int,@@identity) as id;;";
 
                     command.Parameters.Add(new SqlParameter("@id_professor", System.Data.SqlDbType.Int)).Value = idProfessor;
                     command.Parameters.Add(new SqlParameter("@id_aluno", System.Data.SqlDbType.Int)).Value = recadosAlunos.Recado.Id;
+                    command.Parameters.Add(new SqlParameter("@id_status_recado", System.Data.SqlDbType.Int)).Value = 2;
                     command.Parameters.Add(new SqlParameter("@assunto", System.Data.SqlDbType.VarChar)).Value = recadosAlunos.Recado.Assunto;
                     command.Parameters.Add(new SqlParameter("@descricao", System.Data.SqlDbType.VarChar)).Value = recadosAlunos.Recado.Descricao;
                     command.Parameters.Add(new SqlParameter("@data", System.Data.SqlDbType.Date)).Value = recadosAlunos.Recado.Data;

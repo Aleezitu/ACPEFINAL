@@ -1,72 +1,83 @@
 ﻿@model ACPEFINAL.Models.Aluno
 
 @{
-    ViewData["Title"] = "Perfil do Aluno";
+    ViewData["Title"] = $"Perfil do Aluno - {Model.Nome}";
+    string dataFormatada = Model.DataNascimento.ToString("dd/MM/yyyy");
 }
 
-<h1>Perfil</h1>
+<link href="~/css/perfil-aluno.css" rel="stylesheet" />
 
-<div>
-    <h4>Aluno</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cpf)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cpf)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Senha)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Senha)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataNascimento)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataNascimento)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Sexo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Sexo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Telefone)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataCriacao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataCriacao)
-        </dd>
-    </dl>
+<div class="welcome">
+    <h1 class="text-center">Seja bem-vindo aluno, @Html.DisplayFor(model => model.Nome)</h1>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+<div class="container">
+    <div class="info-professor">
+        <div class="img-perfil">
+            <img src="https://dol.ismcdn.jp/mwimgs/f/5/-/img_f5aa31eb22c71434149cc6c38bcd9a96257528.jpg" alt="imagem do aluno">
+        </div>
+        <div class="inf-basica">
+            <div class="label ">
+                <span class="text-center">Informações básicas</span>
+            </div>
+            <div class="capsula">
+                <div class="label">
+                    <h3>Nome</h3>
+                </div>
+                <div class="conteudo">
+                    <p>@Model.Nome</p>
+                </div>
+            </div>
+            <div class="capsula">
+                <div class="label">
+                    <h3>Data de nascimento</h3>
+                </div>
+                <div class="conteudo">
+                    <p>@dataFormatada</p>
+                </div>
+            </div>
+            <div class="capsula">
+                <div class="label">
+                    <h3>CPF</h3>
+                </div>
+                <div class="conteudo">
+                    <p>@Model.Cpf</p>
+                </div>
+            </div>
+            <div class="capsula">
+                <div class="label">
+                    <h3>Gênero</h3>
+                </div>
+                <div class="conteudo">
+                    <p class="">
+                        @Model.Sexo
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="inf-contato">
+            <div class="label">
+                <span class="text-center">Informações de contato</span>
+            </div>
+            <div class="capsula">
+                <div class="label">
+                    <h3>E-mail</h3>
+                </div>
+                <div class="conteudo">
+                    <p class="">
+                        @Model.Email
+                    </p>
+                </div>
+            </div>
+            <div class="capsula">
+                <div class="label">
+                    <h3 class="">Telefone</h3>
+                </div>
+                <div class="conteudo">
+                    <p class="">
+                        @Model.Telefone
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

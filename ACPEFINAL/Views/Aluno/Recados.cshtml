@@ -12,19 +12,35 @@
         background-color: pink;
     }
 
+    .card-ativo {
+        background-color: lightgreen;
+    }
+
+    .card-desativado {
+        background-color: lightcoral;
+    }
 </style>
 
 <div style="display:flex; gap:5px;">
     @foreach (var item in Model)
     {
-        <fieldset class="card">
+        <fieldset class="card @(@item.StatusRecado == 3 ?  "card-ativo" : "card-desativado")">
             <p>@Html.DisplayFor(modelItem => item.Descricao)</p>
+           
             <p>
                 @Html.DisplayFor(modelItem => item.Assunto)
                 <span class="enviado">enviado por: @Html.DisplayFor(modelItem => item.NomeProfessor), @Html.DisplayFor(modelItem => item.Data)</span>
             </p>
-            <input type="checkbox" name="Lido" id="lido1">
-            <label for="lido1">Estou ciente!</label>
+            @if (item.StatusRecado == 2)
+            {
+                <form asp-controller="Aluno" asp-action="ConfirmarRecado" method="get">
+                    <input type="hidden" value="@item.Id" name="IdRecado">
+                    <input type="submit" value="Confirmar Recado"/>
+                </form>
+                
+            }
+
+            
         </fieldset>
     }
 </div>

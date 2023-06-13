@@ -30,6 +30,12 @@ namespace ACPEFINAL.Controllers
             return View(this.repository.mostrarRecados(idAluno));
         }
 
+        public IActionResult ConfirmarRecado(int IdRecado)
+        {
+            this.repository.confirmarRecado(IdRecado);
+            return RedirectToAction("Recados", "Aluno");
+        }
+
         public IActionResult Tarefas()
         {
             int idAluno = this.sessao.get().Id;

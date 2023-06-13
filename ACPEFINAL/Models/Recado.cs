@@ -8,5 +8,17 @@
         public DateTime Data { get; set; }
         public string Descricao { get; set; }
         public string NomeProfessor { get; set; }
+        public int StatusRecado { get; set; }
+
+        public Recado() 
+        { 
+            this.Id= 0;
+            this.NomeAluno = "";
+            this.Assunto = "";
+            this.Data = DateTime.Now;
+            this.Descricao = "";
+            this.NomeProfessor = "";
+            this.StatusRecado = 0;
+        }
     }
 }

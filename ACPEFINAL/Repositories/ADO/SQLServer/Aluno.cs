@@ -55,7 +55,7 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
                 {
                     command.Connection = connection;
 
-                    command.CommandText = "SELECT rec.assunto AS assunto, rec.descricao AS descricao, rec.data AS data, pro.nome AS nome_professor FROM Recados AS rec INNER JOIN Professores as pro ON (rec.id_professor=pro.id_professor) WHERE id_aluno = @id";
+                    command.CommandText = "SELECT rec.id_recado AS id_recado, rec.id_status_recado AS id_status_recado, rec.assunto AS assunto, rec.descricao AS descricao, rec.data AS data, pro.nome AS nome_professor FROM Recados AS rec INNER JOIN Professores as pro ON (rec.id_professor=pro.id_professor) WHERE id_aluno = @id";
                     
                     command.Parameters.Add(new SqlParameter("@id", System.Data.SqlDbType.Int)).Value = id;
 
@@ -64,6 +64,8 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
                     while (dr.Read())
                     {
                         Models.Recado recado = new Models.Recado();
+                        recado.Id = (int)dr["id_recado"];
+                        recado.StatusRecado = (int)dr["id_status_recado"];
                         recado.Assunto = dr["assunto"].ToString();
                         recado.Descricao = dr["descricao"].ToString();
                         recado.Data = (DateTime)dr["data"];
@@ -76,6 +78,24 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
             }
 
             return recados;
+        }
+
+        public void confirmarRecado(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+
+                    command.CommandText = "update Recados set id_status_recado = 3 where id_recado = @id_recado";
+                    command.Parameters.Add(new SqlParameter("@id_recado", System.Data.SqlDbType.Int)).Value = id;
+
+                    command.ExecuteScalar();
+                }
+            }
         }
 
         public List<Models.Tarefa> mostrarTarefas(int id)

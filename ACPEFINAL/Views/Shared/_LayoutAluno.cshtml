@@ -6,12 +6,37 @@
     <title>@ViewData["Title"] - ACPEFINAL</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style-padrao.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ACPEFINAL.styles.css" asp-append-version="true" />
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom" style="position: inherit;;">
+   <div class="wrapper">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom" style="position: inherit;;">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
             <span class="fs-3">
                 <img src="~/img/logoacpe.png" style="width: 50px;" alt="logo do projeto de Auxiliar de Comunicação entre Pais e Escola" />
@@ -48,6 +73,8 @@
     <footer class="rodape">
         <p>Desenvolvido por &copy;Grupo 7</p>
     </footer>
+    </div>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
