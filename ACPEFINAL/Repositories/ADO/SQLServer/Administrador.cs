@@ -49,6 +49,12 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
                     command.Parameters.Add(new SqlParameter("@telefone", System.Data.SqlDbType.VarChar)).Value = proAl.Aluno.Telefone;
 
                     proAl.Aluno.Id = (int)command.ExecuteScalar();
+
+                    command.CommandText = "INSERT INTO TurmasAlunos (id_turma, id_aluno) VALUES (1, @id_aluno); select convert(int,@@identity) as id;;";
+
+                    command.Parameters.Add(new SqlParameter("@id_aluno", System.Data.SqlDbType.Int)).Value = proAl.Aluno.Id;
+
+                    command.ExecuteScalar();
                 }
             }
         }
