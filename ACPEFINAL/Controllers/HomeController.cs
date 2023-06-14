@@ -6,11 +6,13 @@ namespace ACPEFINAL.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly Repositories.ADO.SQLServer.Home repository;
+        private readonly Services.ISessao sessao;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IConfiguration configuration, Services.ISessao sessao)
         {
-            _logger = logger;
+            this.repository = new Repositories.ADO.SQLServer.Home(configuration.GetConnectionString(Configurations.Appsettings.getKeyConnectionString()));
+            this.sessao = sessao;
         }
 
         public IActionResult Index()
@@ -23,10 +25,24 @@ namespace ACPEFINAL.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Pergunte()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
+
+        [HttpPost]
+        public IActionResult Pergunte(Models.Duvida duvida)
+        {
+            try
+            {
+                this.repository.enviarPergunta(duvida);
+                return RedirectToAction("Index", "Home");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
     }
 }

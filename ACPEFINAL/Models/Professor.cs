@@ -5,6 +5,7 @@ namespace ACPEFINAL.Models
     public class Professor
     {
         public int Id { get; set; }
+        public int IdLogin { get; set; }
         public string Nome { get; set; }
         public string Cpf { get; set; }
         public string Email { get; set; }
@@ -19,6 +20,7 @@ namespace ACPEFINAL.Models
         public Professor()
         {
             this.Id = 0;
+            this.IdLogin = 0;
             this.Nome = "";
             this.Cpf = "";
             this.Email = "";

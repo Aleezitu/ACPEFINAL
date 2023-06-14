@@ -39,6 +39,8 @@
                     <th>Estado</th>
                     <th>País</th>
                     <th>Sigla</th>
+                    <th>Acoes</th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -61,6 +63,10 @@
                         <td>@Model.Endereco[i].Estado</td>
                         <td>@Model.Endereco[i].Pais</td>
                         <td>@Model.Endereco[i].Sigla</td>
+
+                        <td>
+                            @Html.ActionLink("Editar", "EditarProfessores", new { id = @Model.Professor[i].Id })
+                        </td>
                     </tr>
                 }
             </tbody>

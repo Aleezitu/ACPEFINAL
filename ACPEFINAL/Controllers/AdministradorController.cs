@@ -64,9 +64,57 @@ namespace ACPEFINAL.Controllers
             return View(this.repository.listarAlunos());
         }
 
+        public IActionResult EditarAlunos(int id)
+        {
+            return View(this.repository.listarAluno(id));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditarAlunos(Models.AlunoEndereco alunoEndereco)
+        {
+            try
+            {
+                this.repository.atualizarAlunos(alunoEndereco);
+                return RedirectToAction("ListarAlunos","Administrador");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public IActionResult EditarProfessores(int id)
+        {
+            return View(this.repository.listarProf(id));
+        }
+
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditarProfessores(Models.ProfessorEnderecos profEndereco)
+        {
+            try
+            {
+                this.repository.atualizarProfessores(profEndereco);
+                return RedirectToAction("ListarProfessor", "Administrador");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+
         public IActionResult ListarProfessor()
         {
             return View(this.repository.listarProfessor());
+        }
+
+
+        public IActionResult Duvidas()
+        {
+            return View(this.repository.listarDuvidas());
         }
     }
 }

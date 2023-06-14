@@ -3,6 +3,8 @@
     public class Aluno
     {
         public int Id { get; set; }
+        public int IdLogin { get; set; }
+
         public string Nome { get; set; }
         public string Cpf { get; set; }
         public string Email { get; set; }
@@ -15,6 +17,7 @@
         public Aluno()
         {
             this.Id = 0;
+            this.IdLogin = 0;
             this.Nome = "";
             this.Cpf = "";
             this.Email = "";

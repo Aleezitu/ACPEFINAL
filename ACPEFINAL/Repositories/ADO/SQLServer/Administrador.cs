@@ -2,6 +2,7 @@
 using Microsoft.Data.SqlClient;
 using NuGet.Protocol.Plugins;
 using System.Collections.Generic;
+using System.Data;
 
 namespace ACPEFINAL.Repositories.ADO.SQLServer
 {
@@ -136,7 +137,7 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
                 {
                     command.Connection = connection;
 
-                    command.CommandText = "SELECT alu.id_aluno as id_aluno, ende.rua as rua, ende.numero as numero, ende.complemento as complemento, ende.cidade as cidade, ende.cep as cep, alu.nome as nome, alu.cpf as cpf, alu.data_nascimento as data_nascimento, alu.createdAt as data_criacao, alu.sexo as sexo, alu.telefone as telefone, log.email as email, ufs.nome as nomeestado, ufs.pais as pais, ufs.sigla as sigla FROM Alunos AS alu LEFT JOIN Login as log ON (log.id_login=alu.id_login) LEFT JOIN Enderecos AS ende ON (ende.id_endereco=alu.id_endereco) LEFT JOIN Ufs as ufs ON (ufs.id_uf=ende.id_uf) ";
+                    command.CommandText = "SELECT log.id_login as id_login,ende.id_endereco as id_endereco, alu.id_aluno as id_aluno, ende.rua as rua, ende.numero as numero, ende.complemento as complemento, ende.cidade as cidade, ende.cep as cep, alu.nome as nome, alu.cpf as cpf, alu.data_nascimento as data_nascimento, alu.createdAt as data_criacao, alu.sexo as sexo, alu.telefone as telefone, log.email as email, ufs.nome as nomeestado, ufs.pais as pais, ufs.sigla as sigla FROM Alunos AS alu LEFT JOIN Login as log ON (log.id_login=alu.id_login) LEFT JOIN Enderecos AS ende ON (ende.id_endereco=alu.id_endereco) LEFT JOIN Ufs as ufs ON (ufs.id_uf=ende.id_uf) ";
 
                     SqlDataReader dr = command.ExecuteReader();
 
@@ -144,6 +145,7 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
                     {
                         Models.Aluno aluno = new Models.Aluno();
                         aluno.Id = (int)dr["id_aluno"];
+                        aluno.IdLogin = (int)dr["id_login"];
                         aluno.Nome = dr["nome"].ToString();
                         aluno.Cpf = dr["cpf"].ToString();
                         aluno.Email = dr["email"].ToString();
@@ -152,9 +154,11 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
                         aluno.Telefone = dr["telefone"].ToString();
                         aluno.DataCriacao = (DateTime)dr["data_criacao"];
 
+
                         alunos.Add(aluno);
 
                         Models.Endereco endereco = new Endereco();
+                        endereco.Id = (int)dr["id_endereco"];
                         endereco.Rua = dr["rua"].ToString();
                         endereco.Numero = dr["numero"].ToString();
                         endereco.Complemento = dr["complemento"].ToString();
@@ -164,7 +168,6 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
                         endereco.Sigla = dr["sigla"].ToString();
 
                         enderecos.Add(endereco);
-
                     }
                 }
                 alunoEnderecoLogins.Aluno = alunos;
@@ -172,6 +175,100 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
             }
 
             return alunoEnderecoLogins;
+        }
+
+        public Models.AlunoEndereco listarAluno(int id)
+        {
+            Models.AlunoEndereco alunoEndereco = new Models.AlunoEndereco();
+
+            Models.Aluno alunos = new Models.Aluno();
+            Models.Endereco enderecos = new Models.Endereco();
+
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+
+                    command.CommandText = "SELECT log.id_login as id_login,ende.id_endereco as id_endereco, alu.id_aluno as id_aluno, ende.rua as rua, ende.numero as numero, ende.complemento as complemento, ende.cidade as cidade, ende.cep as cep, alu.nome as nome, alu.cpf as cpf, alu.data_nascimento as data_nascimento, alu.createdAt as data_criacao, alu.sexo as sexo, alu.telefone as telefone, log.email as email, ufs.nome as nomeestado, ufs.pais as pais, ufs.sigla as sigla FROM Alunos AS alu LEFT JOIN Login as log ON (log.id_login=alu.id_login) LEFT JOIN Enderecos AS ende ON (ende.id_endereco=alu.id_endereco) LEFT JOIN Ufs as ufs ON (ufs.id_uf=ende.id_uf) WHERE alu.id_aluno = @id";
+
+                    command.Parameters.Add(new SqlParameter("@id", System.Data.SqlDbType.Int)).Value = id;
+
+                    SqlDataReader dr = command.ExecuteReader();
+
+                    if (dr.Read())
+                    {
+                        Models.Aluno aluno = new Models.Aluno();
+                        aluno.Id = (int)dr["id_aluno"];
+                        aluno.IdLogin = (int)dr["id_login"];
+                        aluno.Nome = dr["nome"].ToString();
+                        aluno.Cpf = dr["cpf"].ToString();
+                        aluno.Email = dr["email"].ToString();
+                        aluno.DataNascimento = (DateTime)dr["data_nascimento"];
+                        aluno.Sexo = dr["sexo"].ToString();
+                        aluno.Telefone = dr["telefone"].ToString();
+                        aluno.DataCriacao = (DateTime)dr["data_criacao"];
+
+                        Models.Endereco endereco = new Endereco();
+                        endereco.Id = (int)dr["id_endereco"];
+                        endereco.Rua = dr["rua"].ToString();
+                        endereco.Numero = dr["numero"].ToString();
+                        endereco.Complemento = dr["complemento"].ToString();
+                        endereco.Cidade = dr["cidade"].ToString();
+                        endereco.Estado = dr["nomeestado"].ToString();
+                        endereco.Pais = dr["pais"].ToString();
+                        endereco.Sigla = dr["sigla"].ToString();
+
+                        alunoEndereco.Aluno = aluno;
+                        alunoEndereco.Endereco = endereco;
+                    }
+                }
+            }
+
+            return alunoEndereco;
+        }
+
+        public void atualizarAlunos(Models.AlunoEndereco alunoEndereco)
+        {
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+
+                    command.CommandText = "UPDATE Enderecos SET rua = @rua, numero = @numero, complemento = @complemento, cidade = @cidade, cep = @cep where id_endereco = @idENDERECO;";
+
+                    command.Parameters.Add(new SqlParameter("@idENDERECO", System.Data.SqlDbType.Int)).Value = alunoEndereco.Endereco.Id;
+                    command.Parameters.Add(new SqlParameter("@rua", System.Data.SqlDbType.VarChar)).Value = alunoEndereco.Endereco.Rua;
+                    command.Parameters.Add(new SqlParameter("@numero", System.Data.SqlDbType.VarChar)).Value = alunoEndereco.Endereco.Numero;
+                    command.Parameters.Add(new SqlParameter("@complemento", System.Data.SqlDbType.VarChar)).Value = alunoEndereco.Endereco.Complemento;
+                    command.Parameters.Add(new SqlParameter("@cidade", System.Data.SqlDbType.VarChar)).Value = alunoEndereco.Endereco.Cidade;
+                    command.Parameters.Add(new SqlParameter("@cep", System.Data.SqlDbType.VarChar)).Value = alunoEndereco.Endereco.Cep;
+                    command.ExecuteScalar();
+
+
+                    command.CommandText = "UPDATE Login SET email = @email where id_login = @idLOGIN;";
+                    command.Parameters.Add(new SqlParameter("@idLOGIN", System.Data.SqlDbType.Int)).Value = alunoEndereco.Aluno.IdLogin;
+                    command.Parameters.Add(new SqlParameter("@email", System.Data.SqlDbType.VarChar)).Value = alunoEndereco.Aluno.Email;
+                    command.ExecuteScalar();
+
+
+                    command.CommandText = "UPDATE Alunos set nome = @nome, cpf = @cpf, data_nascimento = @data_nascimento, sexo = @sexo, telefone = @telefone WHERE id_aluno = @idALUNO";
+
+                    command.Parameters.Add(new SqlParameter("@idALUNO", System.Data.SqlDbType.Int)).Value = alunoEndereco.Aluno.Id;
+                    command.Parameters.Add(new SqlParameter("@nome", System.Data.SqlDbType.VarChar)).Value = alunoEndereco.Aluno.Nome;
+                    command.Parameters.Add(new SqlParameter("@cpf", System.Data.SqlDbType.VarChar)).Value = alunoEndereco.Aluno.Cpf;
+                    command.Parameters.Add(new SqlParameter("@data_nascimento", System.Data.SqlDbType.Date)).Value = alunoEndereco.Aluno.DataNascimento;
+                    command.Parameters.Add(new SqlParameter("@sexo", System.Data.SqlDbType.VarChar)).Value = alunoEndereco.Aluno.Sexo;
+                    command.Parameters.Add(new SqlParameter("@telefone", System.Data.SqlDbType.VarChar)).Value = alunoEndereco.Aluno.Telefone;
+
+                    command.ExecuteScalar();
+                }
+            }
         }
 
         public Models.ProfessorEndereco listarProfessor()
@@ -201,6 +298,7 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
                         professor.Cpf = dr["cpf"].ToString();
                         professor.Email = dr["email"].ToString();
                         professor.DataCriacao = (DateTime)dr["data_criacao"];
+                        professor.DataNascimento = (DateTime)dr["data_nascimento"];
                         professor.Sexo = dr["sexo"].ToString();
                         professor.Telefone = dr["telefone"].ToString();
 
@@ -224,6 +322,180 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
             }
 
             return alunoEnderecoLogins;
+        }
+
+
+
+        public Models.ProfessorEnderecos listarProf(int id)
+        {
+            Models.ProfessorEnderecos alunoEnderecoLogins = new Models.ProfessorEnderecos();
+
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+
+                    command.CommandText = "SELECT pro.id_professor AS id_professor, log.id_login as id_login, ende.id_endereco as id_endereco, pro.nome as nome, pro.cpf as cpf, pro.data_nascimento as data_nascimento, pro.sexo as sexo, pro.telefone as telefone, log.email as email, pro.formacao as formacao, pro.createdAt as data_criacao, ende.rua as rua, ende.numero as numero, ende.complemento as complemento, ende.cidade as cidade, ende.cep as cep, ufs.nome as nomeestado, ufs.pais as pais, ufs.sigla as sigla FROM Professores AS pro LEFT JOIN Enderecos AS ende ON (pro.id_endereco=ende.id_endereco) LEFT JOIN Ufs AS ufs ON (ende.id_uf=ufs.id_uf) LEFT JOIN Login AS log ON (pro.id_login=log.id_login) where id_professor = @id";
+
+                    command.Parameters.Add(new SqlParameter("@id", System.Data.SqlDbType.Int)).Value = id;
+                    SqlDataReader dr = command.ExecuteReader();
+
+                    if (dr.Read())
+                    {
+                        Models.Professor professor = new Models.Professor();
+                        professor.Id = (int)dr["id_professor"];
+                        professor.IdLogin = (int)dr["id_login"];
+                        professor.Nome = dr["nome"].ToString();
+                        professor.Cpf = dr["cpf"].ToString();
+                        professor.DataNascimento = (DateTime)dr["data_nascimento"];
+                        professor.Email = dr["email"].ToString();
+                        professor.Sexo = dr["sexo"].ToString();
+                        professor.Formacao = dr["formacao"].ToString();
+                        professor.Telefone = dr["telefone"].ToString();
+
+
+                        Models.Endereco endereco = new Endereco();
+                        endereco.Id = (int)dr["id_endereco"];
+                        endereco.Rua = dr["rua"].ToString();
+                        endereco.Numero = dr["numero"].ToString();
+                        endereco.Complemento = dr["complemento"].ToString();
+                        endereco.Cidade = dr["cidade"].ToString();
+                        endereco.Estado = dr["nomeestado"].ToString();
+                        endereco.Pais = dr["pais"].ToString();
+                        endereco.Sigla = dr["sigla"].ToString();
+
+                        alunoEnderecoLogins.Professor = professor;
+                        alunoEnderecoLogins.Endereco = endereco;
+                    }
+                }
+            }
+
+            return alunoEnderecoLogins;
+        }
+
+
+        public void atualizarProfessores(Models.ProfessorEnderecos profEnderecos)
+        {
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+
+                    command.CommandText = "UPDATE Enderecos SET rua = @rua, numero = @numero, complemento = @complemento, cidade = @cidade, cep = @cep where id_endereco = @idENDERECO;";
+
+                    command.Parameters.Add(new SqlParameter("@idENDERECO", System.Data.SqlDbType.Int)).Value = profEnderecos.Endereco.Id;
+                    command.Parameters.Add(new SqlParameter("@rua", System.Data.SqlDbType.VarChar)).Value = profEnderecos.Endereco.Rua;
+                    command.Parameters.Add(new SqlParameter("@numero", System.Data.SqlDbType.VarChar)).Value = profEnderecos.Endereco.Numero;
+                    command.Parameters.Add(new SqlParameter("@complemento", System.Data.SqlDbType.VarChar)).Value = profEnderecos.Endereco.Complemento;
+                    command.Parameters.Add(new SqlParameter("@cidade", System.Data.SqlDbType.VarChar)).Value = profEnderecos.Endereco.Cidade;
+                    command.Parameters.Add(new SqlParameter("@cep", System.Data.SqlDbType.VarChar)).Value = profEnderecos.Endereco.Cep;
+                    command.ExecuteScalar();
+
+
+                    command.CommandText = "UPDATE Login SET email = @email where id_login = @idLOGIN;";
+                    command.Parameters.Add(new SqlParameter("@idLOGIN", System.Data.SqlDbType.Int)).Value = profEnderecos.Professor.IdLogin;
+                    command.Parameters.Add(new SqlParameter("@email", System.Data.SqlDbType.VarChar)).Value = profEnderecos.Professor.Email;
+                    command.ExecuteScalar();
+
+
+                    command.CommandText = "UPDATE Professores set nome = @nome, cpf = @cpf, sexo = @sexo, telefone = @telefone, formacao = @formacao WHERE id_professor = @idPROFESSOR";
+
+                    command.Parameters.Add(new SqlParameter("@idPROFESSOR", System.Data.SqlDbType.Int)).Value = profEnderecos.Professor.Id;
+                    command.Parameters.Add(new SqlParameter("@formacao", System.Data.SqlDbType.VarChar)).Value = profEnderecos.Professor.Formacao;
+
+                    command.Parameters.Add(new SqlParameter("@nome", System.Data.SqlDbType.VarChar)).Value = profEnderecos.Professor.Nome;
+                    command.Parameters.Add(new SqlParameter("@cpf", System.Data.SqlDbType.VarChar)).Value = profEnderecos.Professor.Cpf;
+                    command.Parameters.Add(new SqlParameter("@sexo", System.Data.SqlDbType.VarChar)).Value = profEnderecos.Professor.Sexo;
+                    command.Parameters.Add(new SqlParameter("@telefone", System.Data.SqlDbType.VarChar)).Value = profEnderecos.Professor.Telefone;
+
+                    command.ExecuteScalar();
+                }
+            }
+        }
+
+
+
+        public void atualizarProfessros(Models.AlunoEndereco alunoEndereco)
+        {
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+
+                    command.CommandText = "UPDATE Enderecos SET rua = @rua, numero = @numero, complemento = @complemento, cidade = @cidade, cep = @cep where id_endereco = @idENDERECO;";
+
+                    command.Parameters.Add(new SqlParameter("@idENDERECO", System.Data.SqlDbType.Int)).Value = alunoEndereco.Endereco.Id;
+                    command.Parameters.Add(new SqlParameter("@rua", System.Data.SqlDbType.VarChar)).Value = alunoEndereco.Endereco.Rua;
+                    command.Parameters.Add(new SqlParameter("@numero", System.Data.SqlDbType.VarChar)).Value = alunoEndereco.Endereco.Numero;
+                    command.Parameters.Add(new SqlParameter("@complemento", System.Data.SqlDbType.VarChar)).Value = alunoEndereco.Endereco.Complemento;
+                    command.Parameters.Add(new SqlParameter("@cidade", System.Data.SqlDbType.VarChar)).Value = alunoEndereco.Endereco.Cidade;
+                    command.Parameters.Add(new SqlParameter("@cep", System.Data.SqlDbType.VarChar)).Value = alunoEndereco.Endereco.Cep;
+                    command.ExecuteScalar();
+
+
+                    command.CommandText = "UPDATE Login SET email = @email where id_login = @idLOGIN;";
+                    command.Parameters.Add(new SqlParameter("@idLOGIN", System.Data.SqlDbType.Int)).Value = alunoEndereco.Aluno.IdLogin;
+                    command.Parameters.Add(new SqlParameter("@email", System.Data.SqlDbType.VarChar)).Value = alunoEndereco.Aluno.Email;
+                    command.ExecuteScalar();
+
+
+                    command.CommandText = "UPDATE Alunos set nome = @nome, cpf = @cpf, data_nascimento = @data_nascimento, sexo = @sexo, telefone = @telefone WHERE id_aluno = @idALUNO";
+
+                    command.Parameters.Add(new SqlParameter("@idALUNO", System.Data.SqlDbType.Int)).Value = alunoEndereco.Aluno.Id;
+                    command.Parameters.Add(new SqlParameter("@nome", System.Data.SqlDbType.VarChar)).Value = alunoEndereco.Aluno.Nome;
+                    command.Parameters.Add(new SqlParameter("@cpf", System.Data.SqlDbType.VarChar)).Value = alunoEndereco.Aluno.Cpf;
+                    command.Parameters.Add(new SqlParameter("@data_nascimento", System.Data.SqlDbType.Date)).Value = alunoEndereco.Aluno.DataNascimento;
+                    command.Parameters.Add(new SqlParameter("@sexo", System.Data.SqlDbType.VarChar)).Value = alunoEndereco.Aluno.Sexo;
+                    command.Parameters.Add(new SqlParameter("@telefone", System.Data.SqlDbType.VarChar)).Value = alunoEndereco.Aluno.Telefone;
+
+                    command.ExecuteScalar();
+                }
+            }
+        }
+
+        public List<Models.Duvida> listarDuvidas()
+        {
+            List<Models.Duvida> duvidas  = new List<Models.Duvida>();
+
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+
+                    //command.CommandText = "select f.id_faq as id_faq, per.id_pergunta as id_pergunta, res.id_resposta as id_resposta, per.pergunta as pergunta, res.resposta as resposta, per.email_usuario as email_usuario, per.data_pergunta as data_pergunta from Faq as f left join Perguntas as per ON (per.id_pergunta=f.id_pergunta) left join Respostas as res ON (res.id_resposta=f.id_resposta)";
+
+                    command.CommandText = "select id_pergunta, pergunta, email_usuario, data_pergunta from Perguntas";
+
+                    //command.Parameters.Add(new SqlParameter("@id", System.Data.SqlDbType.Int)).Value = id;
+
+                    SqlDataReader dr = command.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        Models.Duvida duvida = new Models.Duvida();
+                        duvida.IdPergunta = (int)dr["id_pergunta"];
+                        duvida.Pergunta = dr["pergunta"].ToString();
+                        duvida.Email = dr["email_usuario"].ToString();
+                        duvida.DataPergunta = (DateTime)dr["data_pergunta"];
+
+                        duvidas.Add(duvida);
+                    }
+                }
+            }
+
+            return duvidas;
         }
 
     }

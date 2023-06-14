@@ -34,6 +34,7 @@
                     <th>Estado</th>
                     <th>País</th>
                     <th>Sigla</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,7 +48,6 @@
                         <td>@Model.Aluno[i].Telefone</td>
                         <td>@Model.Aluno[i].Email</td>
                         <td>@Model.Aluno[i].DataCriacao</td>
-
                         <td>@Model.Endereco[i].Rua</td>
                         <td>@Model.Endereco[i].Numero</td>
                         <td>@Model.Endereco[i].Complemento</td>
@@ -55,6 +55,10 @@
                         <td>@Model.Endereco[i].Estado</td>
                         <td>@Model.Endereco[i].Pais</td>
                         <td>@Model.Endereco[i].Sigla</td>
+                        <td>
+                            @Html.ActionLink("Editar", "EditarAlunos", new { id = @Model.Aluno[i].Id }) |
+                            @Html.ActionLink("Deletar", "Delete", new { id = @Model.Aluno[i].Id })
+                        </td>
                     </tr>
                 }
             </tbody>

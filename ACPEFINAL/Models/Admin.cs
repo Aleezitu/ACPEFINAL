@@ -12,9 +12,6 @@
         public string TipoUsuario { get; set; }
 
 
-
-
-
         public Admin()
         {
             this.Id = 0;
