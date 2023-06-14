@@ -116,5 +116,14 @@ namespace ACPEFINAL.Controllers
         {
             return View(this.repository.listarDuvidas());
         }
+
+        [HttpPost]
+        public IActionResult ResponderDuvida(int id, string resposta)
+        {
+            this.repository.responderPergunta(id, resposta, this.sessao.get().Email);
+
+            return RedirectToAction("Duvidas", "Administrador");
+        }
+
     }
 }
