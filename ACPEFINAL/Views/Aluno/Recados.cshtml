@@ -10,9 +10,15 @@
 <style>
     .card {
         display: flex; 
-        justify-content: space-between; 
+        justify-content: center; 
+        align-items:center;
+        flex-direction:column;
         flex-wrap: wrap;
         background-color: pink;
+        border:1px solid #000;
+        max-width:250px;
+        height:300px;
+        padding:15px;
     }
 
     .card-ativo {
@@ -21,6 +27,14 @@
 
     .card-desativado {
         background-color: lightcoral;
+    }
+    .enviado{
+        font-weight:bold;
+        width:2;
+    }
+
+    .btn-recado{
+        border:none;
     }
 </style>
 
@@ -39,7 +53,7 @@
                 {
                     <form asp-controller="Aluno" asp-action="ConfirmarRecado" method="get">
                         <input type="hidden" value="@item.Id" name="IdRecado">
-                        <input type="submit" value="Confirmar Recado" />
+                        <input class="btn-recado btn btn-primary" type="submit" value="Confirmar Recado" />
                     </form>
 
                 }

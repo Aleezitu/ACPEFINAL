@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Cadastro de Usuarios";
 }
+<link href="~/css/admin.css" rel="stylesheet" />
 
 <style>
 
@@ -15,291 +16,291 @@
     }
 </style>
 
-<fieldset class="mt-5 menu-estilo">
-    <div class="layout-aluno-prof">
-        <p>Escolha uma opção: Aluno ou Professor</p>
-        <div>
-            <label for="aluno">
-                Aluno
-                <input type="radio" name="aluno-prof" id="aluno" value="aluno" onchange="toggleLayout()">
-            </label>
-        </div>
-
-        <div>
-            <label for="professor">
-                Professor
-                <input type="radio" name="aluno-prof" id="professor" value="professor" onchange="toggleLayout()">
-            </label>
-        </div>
-
-        <div>
-            <label for="admin">
-                Admin
-                <input type="radio" name="aluno-prof" id="admin" value="professor" onchange="toggleLayout()">
-            </label>
-        </div>
-        <div id="escolha-mensagem" style="display: none; color: red;">
-            Por favor, escolha uma opção (Aluno ou Professor).
-        </div>
-    </div>
-
-    <div class="layout-aluno" style="display: none;">
-        <form asp-controller="Administrador" asp-action="Aluno">
-            <div class="col-md-14">
-
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="ps-text-field">
-                            <label asp-for="Aluno.Nome">Digite o nome do aluno: </label>
-                            <input asp-for="Aluno.Nome" placeholder="Digite o nome do aluno">
-                        </div>
-                    </div>
-
-                    <div class="col-md-7">
-                        <div class="ps-text-field">
-                            <label asp-for="Aluno.Cpf">Digite o CPF do aluno: </label>
-                            <input asp-for="Aluno.Cpf" placeholder="Digite o CPF do aluno">
-                        </div>
-                    </div>
-
-                    <div class="col-md-7">
-                        <div class="ps-text-field">
-                            <label asp-for="Aluno.Email">Digite o e-mail do aluno: </label>
-                            <input asp-for="Aluno.Email" placeholder="Digite o e-mail do aluno">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="ps-text-field">
-                            <label asp-for="Aluno.Senha">Digite a senha do aluno: </label>
-                            <input asp-for="Aluno.Senha" placeholder="Digite a senha do aluno">
-                        </div>
-                    </div>
-
-                    <div class="col-md-7">
-                        <div class="ps-text-field">
-                            <label asp-for="Aluno.Telefone">Digite o telefone do aluno: </label>
-                            <input asp-for="Aluno.Telefone" placeholder="Digite o telefone do aluno">
-                        </div>
-                    </div>
-
-                    <div class="col-md-7">
-                        <div class="ps-text-field">
-                            <label asp-for="Aluno.DataNascimento">Digite a data de nascimento do aluno: </label>
-                            <input asp-for="Aluno.DataNascimento" type="date" placeholder="Digite a data de nascimento do aluno">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="ps-text-field">
-                            <label asp-for="Rua">Digite a rua do aluno: </label>
-                            <input asp-for="Rua" placeholder="Digite a rua do aluno">
-                        </div>
-                    </div>
-
-                    <div class="col-md-7">
-                        <div class="ps-text-field">
-                            <label asp-for="Numero">Digite o numero do aluno: </label>
-                            <input asp-for="Numero" placeholder="Digite o numero do aluno">
-                        </div>
-                    </div>
-
-                    <div class="col-md-7">
-                        <div class="ps-text-field">
-                            <label asp-for="Complemento">Digite o complemento do aluno: </label>
-                            <input asp-for="Complemento" placeholder="Digite o complemento do aluno">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="ps-text-field">
-                            <label asp-for="Cidade">Digite a cidade do aluno: </label>
-                            <input asp-for="Cidade" placeholder="Digite a cidade do aluno">
-                        </div>
-                    </div>
-
-                    <div class="col-md-7">
-                        <div class="ps-text-field">
-                            <label asp-for="Cep">Digite o cep do aluno: </label>
-                            <input asp-for="Cep" placeholder="Digite o cep do aluno">
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="ps-text-field">
-                            <label asp-for="Aluno.Sexo">Digite o sexo do aluno: </label>
-                            <select asp-for="Aluno.Sexo">
-                                <option>Masculino</option>
-                                <option>Feminino</option>
-                                <option>Outros</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+<div class="container">
+    <fieldset class="mt-5 menu-estilo">
+        <div class="layout-aluno-prof">
+            <p>Escolha uma opção: Aluno ou Professor</p>
+            <div class="form-check">
+                <label for="aluno" form-check-label>
+                    Aluno
+                    <input class="form-check-input" type="radio" name="aluno-prof" id="aluno" value="aluno" onchange="toggleLayout()">
+                </label>
             </div>
 
-            <input type="submit" value="Create" class="btn btn-primary" />
-        </form>
-    </div>
-
-    <div class="layout-professor" style="display: none;">
-        <form asp-controller="Administrador" asp-action="Professor" class="d-flex flex-column justify-content-center align-items-center">
-            <div class="col-md-14">
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="ps-text-field">
-                            <label asp-for="Professor.Nome">Digite o nome do professor: </label>
-                            <input asp-for="Professor.Nome" placeholder="Digite o nome do professor">
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="row">
-                    <div class="col-md-7">
-                        <label asp-for="Professor.Cpf">Digite o CPF do professor: </label>
-                        <input asp-for="Professor.Cpf" placeholder="Digite o CPF do professor">
-                    </div>
-
-                    <div class="col-md-7">
-                        <label asp-for="Professor.Email">Digite o e-mail do professor: </label>
-                        <input asp-for="Professor.Email" placeholder="Digite o e-mail do professor">
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-7">
-                        <label asp-for="Professor.Senha">Digite a senha do professor: </label>
-                        <input asp-for="Professor.Senha" placeholder="Digite a senha do professor">
-                    </div>
-
-
-                    <div class="col-md-7">
-                        <label asp-for="Professor.DataNascimento">Digite a data de nascimento do professor: </label>
-                        <input asp-for="Professor.DataNascimento" type="date">
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-7">
-                        <label asp-for="Professor.Sexo">Digite o sexo do professor: </label>
-                        <input asp-for="Professor.Sexo" placeholder="Digite o sexo do professor">
-                    </div>
-
-                    <div class="col-md-7">
-                        <label asp-for="Professor.Telefone">Digite o telefone do professor: </label>
-                        <input asp-for="Professor.Telefone" placeholder="Digite o telefone do professor">
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-7">
-                            <div class="ps-text-field">
-                                <label asp-for="Rua">Digite a rua do Professor: </label>
-                                <input asp-for="Rua" placeholder="Digite a rua do professor">
-                            </div>
-                        </div>
-
-                        <div class="col-md-7">
-                            <div class="ps-text-field">
-                                <label asp-for="Numero">Digite o numero do Professor: </label>
-                                <input asp-for="Numero" placeholder="Digite o numero do Professor">
-                            </div>
-                        </div>
-
-                        <div class="col-md-7">
-                            <div class="ps-text-field">
-                                <label asp-for="Complemento">Digite o complemento do Professor: </label>
-                                <input asp-for="Complemento" placeholder="Digite o complemento do professor">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-7">
-                            <div class="ps-text-field">
-                                <label asp-for="Cidade">Digite a cidade do professor: </label>
-                                <input asp-for="Cidade" placeholder="Digite a cidade do professor">
-                            </div>
-                        </div>
-
-                        <div class="col-md-7">
-                            <div class="ps-text-field">
-                                <label asp-for="Cep">Digite o cep do professor: </label>
-                                <input asp-for="Cep" placeholder="Digite o cep do professor">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-7">
-                        <label asp-for="Professor.Formacao">Digite a formação do professor: </label>
-                        <input asp-for="Professor.Formacao" placeholder="Digite a formação do professor">
-                    </div>
-                </div>
+            <div class="form-check">
+                <label for="professor" form-check-label>
+                    Professor
+                    <input class="form-check-input" type="radio" name="aluno-prof" id="professor" value="professor" onchange="toggleLayout()">
+                </label>
             </div>
 
-            <input type="submit" value="Create" class="btn btn-primary" />
-        </form>
-    </div>
-
-    <div class="layout-admin" style="display: none;">
-        <form asp-controller="Administrador" asp-action="Admin" class="d-flex flex-column justify-content-center align-items-center">
-            <div class="col-md-14">
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="ps-text-field">
-                            <label asp-for="Admin.Nome">Nome do adm: </label>
-                            <input asp-for="Admin.Nome" placeholder="Nome do adm">
-                        </div>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="ps-text-field">
-                            <label asp-for="Admin.Cpf">CPF do adm: </label>
-                            <input asp-for="Admin.Cpf" placeholder="CPF do adm">
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="ps-text-field">
-                            <label asp-for="Admin.Email">E-mail do adm: </label>
-                            <input asp-for="Admin.Email" placeholder="E-mail do adm">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="ps-text-field">
-                            <label asp-for="Admin.Senha">Senha do adm: </label>
-                            <input asp-for="Admin.Senha" placeholder="Senha do adm">
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-7">
-                        <label asp-for="Admin.Telefone">Telefone do adm: </label>
-                        <input asp-for="Admin.Telefone">
-                    </div>
-                </div>
+            <div class="form-check" form-check-label>
+                <label for="admin">
+                    Admin
+                    <input class="form-check-input" type="radio" name="aluno-prof" id="admin" value="professor" onchange="toggleLayout()">
+                </label>
             </div>
+            <div id="escolha-mensagem" style="display: none; color: red;">
+                Por favor, escolha uma opção (Aluno ou Professor).
+            </div>
+        </div>
 
-            <input type="submit" value="Create" class="btn btn-primary" />
-        </form>
-    </div>
+        <div class="layout-aluno" style="display: none;">
+            <form asp-controller="Administrador" asp-action="Aluno">
+                <div class="container-form">
+                    <div class="">
+                        <div class="">
+                            <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                                <label class="form-label" asp-for="Aluno.Nome">Digite o nome do aluno: </label>
+                                <input class="form-control" asp-for="Aluno.Nome" placeholder="Digite o nome do aluno">
+                            </div>
+                        </div>
 
-</fieldset>
+                        <div class="">
+                            <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                                <label class="form-label" asp-for="Aluno.Cpf">Digite o CPF do aluno: </label>
+                                <input class="form-control" asp-for="Aluno.Cpf" placeholder="Digite o CPF do aluno">
+                            </div>
+                        </div>
 
+                        <div class="">
+                            <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                                <label class="form-label" asp-for="Aluno.Email">Digite o e-mail do aluno: </label>
+                                <input class="form-control" asp-for="Aluno.Email" placeholder="Digite o e-mail do aluno">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <div class="">
+                            <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                                <label class="form-label" asp-for="Aluno.Senha">Digite a senha do aluno: </label>
+                                <input class="form-control" asp-for="Aluno.Senha" placeholder="Digite a senha do aluno">
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                                <label class="form-label" asp-for="Aluno.Telefone">Digite o telefone do aluno: </label>
+                                <input class="form-control" asp-for="Aluno.Telefone" placeholder="Digite o telefone do aluno">
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                                <label class="form-label" asp-for="Aluno.DataNascimento">Digite a data de nascimento do aluno: </label>
+                                <input class="form-control" asp-for="Aluno.DataNascimento" type="date" placeholder="Digite a data de nascimento do aluno">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <div class="">
+                            <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                                <label class="form-label" asp-for="Rua">Digite a rua do aluno: </label>
+                                <input class="form-control" asp-for="Rua" placeholder="Digite a rua do aluno">
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                                <label class="form-label" asp-for="Numero">Digite o numero do aluno: </label>
+                                <input class="form-control" asp-for="Numero" placeholder="Digite o numero do aluno">
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                                <label class="form-label" asp-for="Complemento">Digite o complemento do aluno: </label>
+                                <input class="form-control" asp-for="Complemento" placeholder="Digite o complemento do aluno">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <div class="">
+                            <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                                <label class="form-label" asp-for="Cidade">Digite a cidade do aluno: </label>
+                                <input class="form-control" asp-for="Cidade" placeholder="Digite a cidade do aluno">
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                                <label class="form-label" asp-for="Cep">Digite o cep do aluno: </label>
+                                <input class="form-control" asp-for="Cep" placeholder="Digite o cep do aluno">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="">
+                        <div class="">
+                            <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                                <label class="form-label" asp-for="Aluno.Sexo">Digite o sexo do aluno: </label>
+                                <select class="form-select" asp-for="Aluno.Sexo">
+                                    <option>Masculino</option>
+                                    <option>Feminino</option>
+                                    <option>Outros</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" value="Create" class="btn-criar" />
+            </form>
+        </div>
+
+        <div class="layout-professor" style="display: none;">
+            <form asp-controller="Administrador" asp-action="Professor" class="">
+                <div class="">
+                    <div class="">
+                        <div class="">
+                            <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                                <label class="form-label" asp-for="Professor.Nome">Digite o nome do professor: </label>
+                                <input class="form-control" asp-for="Professor.Nome" placeholder="Digite o nome do professor">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="">
+                        <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                            <label class="form-label" asp-for="Professor.Cpf">Digite o CPF do professor: </label>
+                            <input class="form-control" asp-for="Professor.Cpf" placeholder="Digite o CPF do professor">
+                        </div>
+
+                        <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                            <label class="form-label" asp-for="Professor.Email">Digite o e-mail do professor: </label>
+                            <input class="form-control" asp-for="Professor.Email" placeholder="Digite o e-mail do professor">
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                            <label class="form-label" asp-for="Professor.Senha">Digite a senha do professor: </label>
+                            <input class="form-control" asp-for="Professor.Senha" placeholder="Digite a senha do professor">
+                        </div>
+
+
+                        <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                            <label class="form-label" asp-for="Professor.DataNascimento">Digite a data de nascimento do professor: </label>
+                            <input class="form-control" asp-for="Professor.DataNascimento" type="date">
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                            <label class="form-label" asp-for="Professor.Sexo">Digite o sexo do professor: </label>
+                            <input class="form-control" asp-for="Professor.Sexo" placeholder="Digite o sexo do professor">
+                        </div>
+
+                        <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                            <label class="form-label" asp-for="Professor.Telefone">Digite o telefone do professor: </label>
+                            <input class="form-control" asp-for="Professor.Telefone" placeholder="Digite o telefone do professor">
+                        </div>
+
+                        <div class="">
+                            <div class="">
+                                <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                                    <label class="form-label" asp-for="Rua">Digite a rua do Professor: </label>
+                                    <input class="form-control" asp-for="Rua" placeholder="Digite a rua do professor">
+                                </div>
+                            </div>
+
+                            <div class="">
+                                <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                                    <label class="form-label" asp-for="Numero">Digite o numero do Professor: </label>
+                                    <input class="form-control" asp-for="Numero" placeholder="Digite o numero do Professor">
+                                </div>
+                            </div>
+
+                            <div class="">
+                                <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                                    <label class="form-label" asp-for="Complemento">Digite o complemento do Professor: </label>
+                                    <input class="form-control" asp-for="Complemento" placeholder="Digite o complemento do professor">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="">
+                                <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                                    <label class="form-label" asp-for="Cidade">Digite a cidade do professor: </label>
+                                    <input class="form-control" asp-for="Cidade" placeholder="Digite a cidade do professor">
+                                </div>
+                            </div>
+
+                            <div class="">
+                                <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                                    <label class="form-label" asp-for="Cep">Digite o cep do professor: </label>
+                                    <input class="form-control" asp-for="Cep" placeholder="Digite o cep do professor">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                            <label class="form-label" asp-for="Professor.Formacao">Digite a formação do professor: </label>
+                            <input class="form-control" asp-for="Professor.Formacao" placeholder="Digite a formação do professor">
+                        </div>
+                    </div>
+                </div>
+
+                <input type="submit" value="Create" class="btn-criar" />
+            </form>
+        </div>
+
+        <div class="layout-admin" style="display: none;">
+            <form asp-controller="Administrador" asp-action="Admin" class="">
+                <div class="">
+                    <div class="">
+                        <div class="">
+                            <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                                <label class="form-label" asp-for="Admin.Nome">Nome do adm: </label>
+                                <input class="form-control" asp-for="Admin.Nome" placeholder="Nome do adm">
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                                <label class="form-label" asp-for="Admin.Cpf">CPF do adm: </label>
+                                <input class="form-control" asp-for="Admin.Cpf" placeholder="CPF do adm">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="">
+                        <div class="">
+                            <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                                <label class="form-label" asp-for="Admin.Email">E-mail do adm: </label>
+                                <input class="form-control" asp-for="Admin.Email" placeholder="E-mail do adm">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <div class="">
+                            <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                                <label class="form-label" asp-for="Admin.Senha">Senha do adm: </label>
+                                <input class="form-control" asp-for="Admin.Senha" placeholder="Senha do adm">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group col-md-5 col-lg-6 col-xs-12 col-sm-12">
+                            <label class="form-label" asp-for="Admin.Telefone">Telefone do adm: </label>
+                            <input class="form-control" asp-for="Admin.Telefone">
+                        </div>
+                    </div>
+                </div>
+
+                <input type="submit" value="Create" class="btn-criar" />
+            </form>
+        </div>
+
+    </fieldset>
+
+</div>
 <script>
     function toggleLayout() {
         var alunoRadio = document.getElementById("aluno");

@@ -64,3 +64,6 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+body {
+    background-image: linear-gradient(270deg, #0093E9 0%, #80D0C7 66%);
+}

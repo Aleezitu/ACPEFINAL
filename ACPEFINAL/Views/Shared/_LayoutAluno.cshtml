@@ -36,7 +36,7 @@
 <body>
 
    <div class="wrapper">
-        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom" style="position: inherit;;">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom align-items-center" style="position: inherit;;">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
             <span class="fs-3">
                 <img src="~/img/logoacpe.png" style="width: 50px;" alt="logo do projeto de Auxiliar de Comunicação entre Pais e Escola" />
@@ -53,12 +53,12 @@
             <li class="nav-item">
                 <a asp-controller="Aluno" asp-action="Recados" class="nav-link @(ViewData["Title"] == "Recados do Aluno" ? "active" : "")">Recados</a>
             </li>
-            <li class="nav-item">
+@*            <li class="nav-item">
                 <a asp-controller="Aluno" asp-action="Tarefas" class="nav-link @(ViewData["Title"] == "Tarefas do Aluno" ? "active" : "")">Tarefas</a>
             </li>
             <li class="nav-item">
                 <a href="ajuda-professor.html" class="nav-link">Ajuda</a>
-            </li>
+            </li>*@
             <a asp-controller="Login" asp-action="Logout" class="nav-link">Logout</a>
         </ul>
     </header>
