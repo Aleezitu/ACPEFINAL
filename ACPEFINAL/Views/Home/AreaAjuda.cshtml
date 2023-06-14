@@ -12,9 +12,13 @@
             <dl class="lista-faq">
                 @foreach (var item in Model)
                 {
+                    <dt class="ativo">@item.Pergunta</dt>
+                    <dd class="ativa-faq"><span>R:</span> @item.Resposta </dd>
+
 
                     <dt class="ativo pergunta">@item.Pergunta</dt>
                     <dd class="ativa-faq resposta"><span>R:</span> @item.Resposta </dd>
+
                 }
             </dl>
 

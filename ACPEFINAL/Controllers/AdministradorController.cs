@@ -125,5 +125,26 @@ namespace ACPEFINAL.Controllers
             return RedirectToAction("Duvidas", "Administrador");
         }
 
+        public IActionResult Delete(int id)
+        {
+            this.repository.deletarDuvida(id);
+
+            return RedirectToAction("Duvidas", "Administrador");
+        }
+
+        public IActionResult DeleteAluno(int id)
+        {
+            this.repository.deletarAluno(id);
+
+            return RedirectToAction("ListarAlunos", "Administrador");
+        }
+
+        public IActionResult DeleteProfessor(int id)
+        {
+            this.repository.deletarProfessor(id);
+
+            return RedirectToAction("ListarProfessor", "Administrador");
+        }
+
     }
 }

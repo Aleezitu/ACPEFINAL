@@ -49,6 +49,12 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
                     command.Parameters.Add(new SqlParameter("@telefone", System.Data.SqlDbType.VarChar)).Value = proAl.Aluno.Telefone;
 
                     proAl.Aluno.Id = (int)command.ExecuteScalar();
+
+                    command.CommandText = "INSERT INTO TurmasAlunos (id_turma, id_aluno) VALUES (1, @id_aluno); select convert(int,@@identity) as id;;";
+
+                    command.Parameters.Add(new SqlParameter("@id_aluno", System.Data.SqlDbType.Int)).Value = proAl.Aluno.Id;
+
+                    command.ExecuteScalar();
                 }
             }
         }
@@ -137,7 +143,7 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
                 {
                     command.Connection = connection;
 
-                    command.CommandText = "SELECT log.id_login as id_login,ende.id_endereco as id_endereco, alu.id_aluno as id_aluno, ende.rua as rua, ende.numero as numero, ende.complemento as complemento, ende.cidade as cidade, ende.cep as cep, alu.nome as nome, alu.cpf as cpf, alu.data_nascimento as data_nascimento, alu.createdAt as data_criacao, alu.sexo as sexo, alu.telefone as telefone, log.email as email, ufs.nome as nomeestado, ufs.pais as pais, ufs.sigla as sigla FROM Alunos AS alu LEFT JOIN Login as log ON (log.id_login=alu.id_login) LEFT JOIN Enderecos AS ende ON (ende.id_endereco=alu.id_endereco) LEFT JOIN Ufs as ufs ON (ufs.id_uf=ende.id_uf) ";
+                    command.CommandText = "SELECT log.id_login as id_login,ende.id_endereco as id_endereco, alu.id_aluno as id_aluno, ende.rua as rua, ende.numero as numero, ende.complemento as complemento, ende.cidade as cidade, ende.cep as cep, alu.nome as nome, alu.cpf as cpf, alu.data_nascimento as data_nascimento, alu.createdAt as data_criacao, alu.sexo as sexo, alu.telefone as telefone, log.email as email, ufs.nome as nomeestado, ufs.pais as pais, ufs.sigla as sigla FROM Alunos AS alu LEFT JOIN Login as log ON (log.id_login=alu.id_login) LEFT JOIN Enderecos AS ende ON (ende.id_endereco=alu.id_endereco) LEFT JOIN Ufs as ufs ON (ufs.id_uf=ende.id_uf) where ativo = 1";
 
                     SqlDataReader dr = command.ExecuteReader();
 
@@ -286,7 +292,7 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
                 {
                     command.Connection = connection;
 
-                    command.CommandText = "SELECT pro.id_professor AS id_professor, pro.nome as nome, pro.cpf as cpf, pro.data_nascimento as data_nascimento, pro.sexo as sexo, pro.telefone as telefone, log.email as email, pro.formacao as formacao, pro.createdAt as data_criacao, ende.rua as rua, ende.numero as numero, ende.complemento as complemento, ende.cidade as cidade, ende.cep as cep, ufs.nome as nomeestado, ufs.pais as pais, ufs.sigla as sigla FROM Professores AS pro LEFT JOIN Enderecos AS ende ON (pro.id_endereco=ende.id_endereco) LEFT JOIN Ufs AS ufs ON (ende.id_uf=ufs.id_uf) LEFT JOIN Login AS log ON (pro.id_login=log.id_login)";
+                    command.CommandText = "SELECT pro.id_professor AS id_professor, pro.nome as nome, pro.cpf as cpf, pro.data_nascimento as data_nascimento, pro.sexo as sexo, pro.telefone as telefone, log.email as email, pro.formacao as formacao, pro.createdAt as data_criacao, ende.rua as rua, ende.numero as numero, ende.complemento as complemento, ende.cidade as cidade, ende.cep as cep, ufs.nome as nomeestado, ufs.pais as pais, ufs.sigla as sigla FROM Professores AS pro LEFT JOIN Enderecos AS ende ON (pro.id_endereco=ende.id_endereco) LEFT JOIN Ufs AS ufs ON (ende.id_uf=ufs.id_uf) LEFT JOIN Login AS log ON (pro.id_login=log.id_login) where ativo = 1";
 
                     SqlDataReader dr = command.ExecuteReader();
 
@@ -297,6 +303,7 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
                         professor.Nome = dr["nome"].ToString();
                         professor.Cpf = dr["cpf"].ToString();
                         professor.Email = dr["email"].ToString();
+                        professor.Formacao = dr["formacao"].ToString();
                         professor.DataCriacao = (DateTime)dr["data_criacao"];
                         professor.DataNascimento = (DateTime)dr["data_nascimento"];
                         professor.Sexo = dr["sexo"].ToString();
@@ -474,11 +481,7 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
                 {
                     command.Connection = connection;
 
-                    command.CommandText = "select f.id_faq as id_faq, p.id_pergunta as id_pergunta, r.id_resposta as id_resposta, p.pergunta as pergunta, r.resposta as resposta, r.email_usuario as email_usuario, p.data_pergunta as data_pergunta from Perguntas as p left join Faq as f on (f.id_pergunta=p.id_pergunta) left join Respostas as r on (r.id_resposta=f.id_resposta)";
-
-                    //command.CommandText = "select id_pergunta, pergunta, email_usuario, data_pergunta from Perguntas";
-
-                    //command.Parameters.Add(new SqlParameter("@id", System.Data.SqlDbType.Int)).Value = id;
+                    command.CommandText = "select f.id_faq as id_faq, p.id_pergunta as id_pergunta, r.id_resposta as id_resposta, p.pergunta as pergunta, r.resposta as resposta, r.email_usuario as email_usuario, p.data_pergunta as data_pergunta from Perguntas as p left join Faq as f on (f.id_pergunta=p.id_pergunta) left join Respostas as r on (r.id_resposta=f.id_resposta) where id_faq is not null";
 
                     SqlDataReader dr = command.ExecuteReader();
 
@@ -500,8 +503,6 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
             return duvidas;
         }
 
-
-
         public void responderPergunta(int id, string resposta, string emailUser)
         {
             int idResposta = 0;
@@ -521,6 +522,56 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
                     command.Parameters.Add(new SqlParameter("@id_resposta", System.Data.SqlDbType.VarChar)).Value = idResposta;
                     command.Parameters.Add(new SqlParameter("@id_pergunta", System.Data.SqlDbType.VarChar)).Value = id;
 
+                    command.ExecuteScalar();
+                }
+            }
+        }
+
+
+        public void deletarDuvida(int idFaq)
+        {
+            int id_Faq = idFaq;
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = "DELETE FROM Faq where id_faq = @idFaq";
+                    command.Parameters.Add(new SqlParameter("@idFaq", System.Data.SqlDbType.Int)).Value = id_Faq;
+                    command.ExecuteScalar();
+                }
+            }
+        }
+
+        public void deletarAluno(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = "update Alunos set ativo = 0 where id_aluno = @id";
+                    command.Parameters.Add(new SqlParameter("@id", System.Data.SqlDbType.Int)).Value = id;
+                    command.ExecuteScalar();
+                }
+            }
+        }
+
+        public void deletarProfessor(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = "update Professores set ativo = 0 where id_professor = @id";
+                    command.Parameters.Add(new SqlParameter("@id", System.Data.SqlDbType.Int)).Value = id;
                     command.ExecuteScalar();
                 }
             }

@@ -51,9 +51,10 @@
                         <td>@Model.Endereco[i].Pais</td>
                         <td>@Model.Endereco[i].Sigla</td>
                         <td>
-
-                            <button class="btns editar">@Html.ActionLink("Editar", "EditarAlunos", new { id = @Model.Aluno[i].Id })</button>
+                            @Html.ActionLink("Editar", "EditarAlunos", new { id = @Model.Aluno[i].Id }) |
+                            @Html.ActionLink("Deletar", "DeleteAluno", new { id = @Model.Aluno[i].Id }) <Button class="btns editar">@Html.ActionLink("Editar", "EditarAlunos", new { id = @Model.Aluno[i].Id })</button>
                             <button class="btns excluir">@Html.ActionLink("Deletar", "Delete", new { id = @Model.Aluno[i].Id })</button>
+
                         </td>
                     </tr>
                 }
