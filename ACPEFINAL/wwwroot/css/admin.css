@@ -6,18 +6,29 @@
        
 }
 
-.btns .editar {
+.btns a{
+    color:#fff;
+    text-decoration:none;
+}
+.editar {
     background-color: #0897e7;
     color: #fff;
     font-weight: bold;
+    border: none;
     border-radius: 15px;
+    text-decoration: none;
+    width: 100%;
+    margin:8px 0;
 }
 
-.btns .excluir {
+.excluir {
     background-color: #CD1818;
     color: #fff;
     font-weight: bold;
     border-radius: 15px;
+    border:none;
+    text-decoration:none;
+    width:100%;
 }
 
 .table{
@@ -35,4 +46,40 @@ body {
 tbody > tr {
     background-color: #8EC5FC;
     background-image: linear-gradient(225deg, #8EC5FC 45%, #E0C3FC 82%, #ffffff 100%);
+}
+
+.corpo-tabela tr{
+    height:60px;
+    vertical-align:middle;
+}
+.btn-responder{
+    background-color:#E0C3FC;
+    border-radius:15px;
+    transition:.3s;
+}
+.btn-responder:hover{
+    background-color:#cc01a3;
+    color:#ffffff;
+}
+
+
+.layout-aluno{
+    margin:0 auto;
+}
+
+.btn-criar {
+    display:block;
+    margin: 15px 0;
+    padding:8px 26px;
+    background-color:#0897e7;
+    border:none;
+    border-radius:15px;
+    color:#fff;
+    transition:.3s;
+}
+.btn-criar:hover{
+    transform:scale(1.05) 
+}
+td {
+    vertical-align: middle;
 }

@@ -14,11 +14,6 @@
 </div>
 
 <div class="container">
-    <div class="btns">
-        <a asp-action="Create" class="criar btn">Criar Novo</a>
-        <a asp-action="" class="editar btn">Editar Usuário</a>
-        <a asp-action="" class="excluir btn">Excluir Usuário</a>
-    </div>
     <div class="container-table">
         <table class="table">
             <thead class="table-dark">
@@ -31,7 +26,6 @@
                     <th>Email</th>
                     <th>Formacao</th>
                     <th>Data de Criação</th>
-
                     <th>Rua</th>
                     <th>Número</th>
                     <th>Complemento</th>
@@ -65,8 +59,12 @@
                         <td>@Model.Endereco[i].Sigla</td>
 
                         <td>
-                            @Html.ActionLink("Editar", "EditarProfessores", new { id = @Model.Professor[i].Id }) |
+             @Html.ActionLink("Editar", "EditarProfessores", new { id = @Model.Professor[i].Id }) |
                             @Html.ActionLink("Deletar", "DeleteProfessor", new { id = @Model.Professor[i].Id }) |
+
+
+                            <button class="btns editar">@Html.ActionLink("Editar", "EditarProfessores", new { id = @Model.Professor[i].Id}) </button>
+                            <button class="btns excluir">@Html.ActionLink("Deletar", "Delete", new { id = @Model.Professor[i].Id })</button>
                         </td>
                     </tr>
                 }

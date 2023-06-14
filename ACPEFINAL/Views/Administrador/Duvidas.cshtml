@@ -4,11 +4,8 @@
     ViewData["Title"] = "Duvidas";
 }
 
-<h1>Duvidas</h1>
+<link href="~/css/admin.css" rel="stylesheet" />
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -61,7 +58,61 @@
         }
     </tbody>
 </table>
+<div class="container">
+    <div class="title-padrao">
+        <h1 class="text-center">Dúvidas</h1>
+    </div>
+    <div class="container-table">
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Pergunta)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DataPergunta)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Resposta)
+                    </th>
+                </tr>
+            </thead>
+           @foreach (var item in Model)
+                {
+            <tbody class="corpo-tabela">
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Pergunta)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataPergunta)
+                        </td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.Resposta))
+                            {
+                                @Html.DisplayFor(modelItem => item.Resposta)
+                            }
+                            else
+                            {
+                                <a class="btn btn-responder btn-outline" onclick="exibirModal('@item.IdPergunta', '@item.Pergunta')">
+                                    Responder
+                                </a>
+                                @*<button type="button" class="btn btn-primary responderBtn" data-id="@item.IdPergunta">Responder</button>*@
+                            }
+                        </td>
+                    </tr>
+            </tbody>
+            }
+        </table>
+    </div>
 
+</div>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">

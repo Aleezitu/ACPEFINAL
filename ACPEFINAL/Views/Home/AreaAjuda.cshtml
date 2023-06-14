@@ -5,15 +5,20 @@
 }
 
 
-<main>
+<main class="ajuda">
     <section class="container">
-        <div class="ajuda">
+        <div class="container-ajuda">
             <h1 class="titulo-faq">FAQ</h1>
             <dl class="lista-faq">
                 @foreach (var item in Model)
                 {
                     <dt class="ativo">@item.Pergunta</dt>
                     <dd class="ativa-faq"><span>R:</span> @item.Resposta </dd>
+
+
+                    <dt class="ativo pergunta">@item.Pergunta</dt>
+                    <dd class="ativa-faq resposta"><span>R:</span> @item.Resposta </dd>
+
                 }
             </dl>
 
