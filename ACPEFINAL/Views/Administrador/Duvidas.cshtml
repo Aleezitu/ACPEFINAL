@@ -24,7 +24,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Resposta)
             </th>
-            <th></th>
+            <th>
+
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -50,8 +52,10 @@
                         <a class="btn btn-outline" onclick="exibirModal('@item.IdPergunta', '@item.Pergunta')">
                             Responder
                         </a>
-                        @*<button type="button" class="btn btn-primary responderBtn" data-id="@item.IdPergunta">Responder</button>*@
                     }
+                </td>
+                <td>
+                    @Html.ActionLink("Deletar", "Delete", new { id = @item.IdFaq })
                 </td>
             </tr>
         }

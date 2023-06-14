@@ -65,7 +65,8 @@
                         <td>@Model.Endereco[i].Sigla</td>
 
                         <td>
-                            @Html.ActionLink("Editar", "EditarProfessores", new { id = @Model.Professor[i].Id })
+                            @Html.ActionLink("Editar", "EditarProfessores", new { id = @Model.Professor[i].Id }) |
+                            @Html.ActionLink("Deletar", "DeleteProfessor", new { id = @Model.Professor[i].Id }) |
                         </td>
                     </tr>
                 }
