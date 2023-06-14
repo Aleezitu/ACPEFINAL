@@ -11,6 +11,37 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
             this.connectionString = connectionString;
         }
 
+
+        public List<Duvida> exibirDuvidas()
+        {
+            List<Duvida> duvidas = new List<Duvida>();
+
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+
+                    command.CommandText = "select pergunta, resposta from faq as f inner join Perguntas as p on  p.id_pergunta=f.id_pergunta inner join Respostas as r on r.id_resposta=f.id_resposta";
+
+                    SqlDataReader dr = command.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        Models.Duvida duvida = new Models.Duvida();
+                        duvida.Pergunta = dr["pergunta"].ToString();
+                        duvida.Resposta = dr["resposta"].ToString();
+
+                        duvidas.Add(duvida);
+                    }
+                }
+            }
+
+            return duvidas;
+        }
+
+
         public void enviarPergunta(Models.Duvida duvida)
         {
             using (SqlConnection connection = new SqlConnection(this.connectionString))

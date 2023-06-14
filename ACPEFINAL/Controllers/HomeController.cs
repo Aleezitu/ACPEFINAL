@@ -22,7 +22,7 @@ namespace ACPEFINAL.Controllers
 
         public IActionResult AreaAjuda()
         {
-            return View();
+            return View(this.repository.exibirDuvidas());
         }
 
         public IActionResult Pergunte()

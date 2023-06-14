@@ -464,7 +464,7 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
 
         public List<Models.Duvida> listarDuvidas()
         {
-            List<Models.Duvida> duvidas  = new List<Models.Duvida>();
+            List<Models.Duvida> duvidas = new List<Models.Duvida>();
 
             using (SqlConnection connection = new SqlConnection(this.connectionString))
             {
@@ -474,9 +474,9 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
                 {
                     command.Connection = connection;
 
-                    //command.CommandText = "select f.id_faq as id_faq, per.id_pergunta as id_pergunta, res.id_resposta as id_resposta, per.pergunta as pergunta, res.resposta as resposta, per.email_usuario as email_usuario, per.data_pergunta as data_pergunta from Faq as f left join Perguntas as per ON (per.id_pergunta=f.id_pergunta) left join Respostas as res ON (res.id_resposta=f.id_resposta)";
+                    command.CommandText = "select f.id_faq as id_faq, p.id_pergunta as id_pergunta, r.id_resposta as id_resposta, p.pergunta as pergunta, r.resposta as resposta, r.email_usuario as email_usuario, p.data_pergunta as data_pergunta from Perguntas as p left join Faq as f on (f.id_pergunta=p.id_pergunta) left join Respostas as r on (r.id_resposta=f.id_resposta)";
 
-                    command.CommandText = "select id_pergunta, pergunta, email_usuario, data_pergunta from Perguntas";
+                    //command.CommandText = "select id_pergunta, pergunta, email_usuario, data_pergunta from Perguntas";
 
                     //command.Parameters.Add(new SqlParameter("@id", System.Data.SqlDbType.Int)).Value = id;
 
@@ -485,18 +485,45 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
                     while (dr.Read())
                     {
                         Models.Duvida duvida = new Models.Duvida();
-                        duvida.IdPergunta = (int)dr["id_pergunta"];
+                        duvida.IdFaq = dr["id_faq"] != DBNull.Value ? (int)dr["id_faq"] : 0;
+                        duvida.IdPergunta = dr["id_pergunta"] != DBNull.Value ? (int)dr["id_pergunta"] : 0;
+                        duvida.IdResposta = dr["id_resposta"] != DBNull.Value ? (int)dr["id_resposta"] : 0;
                         duvida.Pergunta = dr["pergunta"].ToString();
+                        duvida.Resposta = dr["resposta"].ToString();
                         duvida.Email = dr["email_usuario"].ToString();
-                        duvida.DataPergunta = (DateTime)dr["data_pergunta"];
+                        duvida.DataPergunta = dr["data_pergunta"] != DBNull.Value ? (DateTime)dr["data_pergunta"] : DateTime.MinValue;
 
                         duvidas.Add(duvida);
                     }
                 }
             }
-
             return duvidas;
         }
 
+
+
+        public void responderPergunta(int id, string resposta, string emailUser)
+        {
+            int idResposta = 0;
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = "INSERT INTO Respostas (resposta, email_usuario) VALUES (@resposta, @email_usuario); select convert(int,@@identity) as id;;";
+                    command.Parameters.Add(new SqlParameter("@resposta", System.Data.SqlDbType.VarChar)).Value = resposta;
+                    command.Parameters.Add(new SqlParameter("@email_usuario", System.Data.SqlDbType.VarChar)).Value = emailUser;
+                    idResposta = (int)command.ExecuteScalar();
+
+                    command.CommandText = "update Faq SET id_resposta = @id_resposta WHERE id_pergunta = @id_pergunta";
+                    command.Parameters.Add(new SqlParameter("@id_resposta", System.Data.SqlDbType.VarChar)).Value = idResposta;
+                    command.Parameters.Add(new SqlParameter("@id_pergunta", System.Data.SqlDbType.VarChar)).Value = id;
+
+                    command.ExecuteScalar();
+                }
+            }
+        }
     }
 }
