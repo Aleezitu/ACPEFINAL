@@ -44,6 +44,7 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
 
         public void enviarPergunta(Models.Duvida duvida)
         {
+            int id_pergunta = 0;
             using (SqlConnection connection = new SqlConnection(this.connectionString))
             {
                 connection.Open();
@@ -56,6 +57,12 @@ namespace ACPEFINAL.Repositories.ADO.SQLServer
 
                     command.Parameters.Add(new SqlParameter("@pergunta", System.Data.SqlDbType.VarChar)).Value = duvida.Pergunta;
                     command.Parameters.Add(new SqlParameter("@email", System.Data.SqlDbType.VarChar)).Value = duvida.Email;
+                    id_pergunta = (int)command.ExecuteScalar();
+
+
+
+                    command.CommandText = "INSERT INTO Faq (id_pergunta) VALUES (@id_pergunta); select convert(int,@@identity) as id;;";
+                    command.Parameters.Add(new SqlParameter("@id_pergunta", System.Data.SqlDbType.VarChar)).Value = id_pergunta;
 
                     duvida.IdPergunta = (int)command.ExecuteScalar();
                 }
